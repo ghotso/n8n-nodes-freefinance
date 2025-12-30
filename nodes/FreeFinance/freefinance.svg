@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html xml:lang="de" lang="de" class="no-js wf-loading">
+<head>
+<style>html{visibility: hidden;opacity:0;}</style>
+<link rel="canonical" href="https://www.freefinance.at/404.html" />
+<title>Not found</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex"/>
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Not found" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://www.freefinance.at/404.html" />
+<meta property="og:site_name" content="FreeFinance" />
+<meta name="og:image" content="https://www.freefinance.at/.imaging/default/dam/freefinance/images/misc/screenshot_freefinance_card.png/jcr:content.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Not found" />
+<meta name="twitter:image" content="https://www.freefinance.at/.imaging/default/dam/freefinance/images/misc/screenshot_freefinance_card.png/jcr:content.png" />
+<meta property="cookie-ctl" content="CC" />
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<![endif]-->
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="/dam/jcr:4c2f9360-a231-407f-b156-277e1adfde93/favicon_at.ico">
+<link rel="stylesheet" type="text/css" href="/.resources/freefinance/resources/css/freefinance-bundle~2025-12-04-20-19-36-000~cache.css" media="all" />
+<script src="/.resources/script/resources/js/script.bundle~2025-12-04-20-19-36-000~cache.js" async defer></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- Matomo -->
+<script type="text/plain" data-cookiecategory="analytics">
+var _paq = window._paq = window._paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+var u="https://analytics.rise-world.com/";
+_paq.push(['setTrackerUrl', u+'matomo.php']);
+_paq.push(['setSiteId', '24']);
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+})();
+</script>
+<!-- End Matomo Code -->
+<!-- Google Tag Manager -->
+<script type="text/plain" data-cookiecategory="analytics">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4B4CB8');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+
+
+<header>
+  
+  <nav class="navbar main-nav navbar-expand-lg navbar-light bg-white  fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/" id="logo">
+        <img src="/dam/jcr:9d6e4165-30e3-45fe-a104-d01df04e514f/frfi_logo_small.svg" alt="FreeFinance Logo" title="FreeFinance" class="d-none d-sm-block">
+            <img src="/dam/jcr:ed62a77e-e3ac-4e66-961a-0b4025ad398b/FF_weiss.png" alt="FreeFinance Logo" title="FreeFinance" class="d-block d-sm-none">
+
+      </a>
+      <!--<a href="/registrieren.html"
+         class="mt-button mt-button-primary d-block d-lg-none">Kostenlos testen!</a>-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="mainNav">
+        <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    Wie es funktioniert?
+                </a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="/wie-es-funktioniert/buchhaltung.html"> <i style="margin-right: 10px" class="far fa-balance-scale-right"></i>Buchhaltung selbst machen</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/rechnungslegung.html"> <i style="margin-right: 10px" class="far fa-paper-plane"></i>Rechnungen schreiben</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/finanzamt.html"> <i style="margin-right: 10px" class="far fa-university"></i>Finanzamt</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/analysen-charts.html"> <i style="margin-right: 10px" class="far fa-chart-line"></i>Analysen &amp; Charts</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/registrierkasse.html"> <i style="margin-right: 10px" class="far fa-receipt"></i>FreeFinance Registrierkasse</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/bankanbindung.html"> <i style="margin-right: 10px" class="far fa-link"></i>Bankanbindung</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/automatisieren-digitalisieren.html"> <i style="margin-right: 10px" class="far fa-qrcode"></i>Digitalisieren &amp; Automatisieren</a>
+    <a class="dropdown-item" href="/wie-es-funktioniert/schnell-startklar.html"> <i style="margin-right: 10px" class="far fa-rocket"></i>Startklar</a>
+</div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    Für wen?
+                </a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="/fuer-wen/pros.html"> Für selbständige Profis</a>
+    <a class="dropdown-item" href="/fuer-wen/vermieter.html"> Für Vermieter</a>
+    <a class="dropdown-item" href="/fuer-wen/gmbh.html"> Für GmbHs</a>
+    <a class="dropdown-item" href="/fuer-wen/berater.html"> Für Berater</a>
+    <a class="dropdown-item" href="/fuer-wen/gesundheit.html"> Für Gesundheitsberufe</a>
+    <a class="dropdown-item" href="/fuer-wen/vereinsbuchhaltung.html"> Für Vereine</a>
+</div>
+              </li>
+              <li class="nav-item"><a class="nav-link"
+                                      href="/preise.html">Preise</a></li>
+              <li class="nav-item"><a class="nav-link" href="/suche.html" title="Suche"><i class="far fa-search"></i></a></li>
+              <li class="nav-item"><a id="loginLinkHeader" class="nav-link" href="https://app.freefinance.at/login.xhtml">Login</a></li>
+              <li class="nav-item"><a href="/registrieren.html"
+                                      class="nav-link mt-button-headline">Kostenlos testen!</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="top-space"></div>
+</header>
+
+<main class="main">
+
+<section class="image-header">
+
+
+
+
+
+    <div class="image picturefill-background  background-overlay" aria-label="">
+            <span data-src="/.imaging/default/dam/freefinance/images/misc/404.jpg/jcr:content.jpg"></span>
+    </div>
+    <div class="text-wrapper">
+        <div class="container text-center">
+            <h1>Oha, Seite nicht gefunden!</h1>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+  <section class="content content-block  " >
+  <div class="anchor">
+    <a id="main-0"></a>
+  </div>
+  <div class="container">
+    <h2>Tut uns leid, da ist etwas nicht da wo es sein sollte!</h2>
+    
+      <div class="content-element text-content"><p>Oder haben Sie sich vielleicht vertippt? Egal, auf unserer <a href="/">Startseite</a> finden Sie ohnehin &uuml;berall hin!</p>
+</div>
+
+<div class="content-element content-box">
+  <div class="row">
+    <div class="col text-col">
+      <p style="text-align:center"><a class="mt-button mt-button-primary" href="/suche.html">Zur Suche auf unserer Homepage</a></p>
+
+    </div>
+  </div>
+</div>
+  </div>
+  </section>
+
+  <section id="cc-main-00" class="content faq  accordion" >
+  <div class="anchor">
+    <a id="main-00"></a>
+  </div>
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Unsere Preise",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Sie finden jetzt alle Preise auf der <a href=\"/preise.html\">Preise-Seite<\/a>!<\/p>\n"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Unser Funktionsumfang",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Unter &quot;<a href=\"/wie-es-funktioniert.html\">Wie es funktioniert<\/a>&quot; in der Kopfzeile&nbsp;finden Sie viele n&uuml;tzliche Information, in der Fu&szlig;teile finden Sie unter &quot;Unsere Module&quot; unsere Funktionen detailliert aufgelistet und&nbsp;thematisch sortiert.<\/p>\n"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Unsere Anwendungshilfe",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p><a href=\"/anwendung.html\">Unsere Anwendungshilfe ist direkt abzurufen<\/a>.<\/p>\n"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Weitere FAQs",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Weiter zu den <a href=\"/faq.html\">FAQs<\/a><\/p>\n"
+      }
+    }
+  ]
+}
+</script>
+  <div class="container">
+    <h2>Vielleicht haben Sie danach gesucht?</h2>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-link" class="collapsed" data-toggle="collapse" data-target="#main-00-0-collapse">
+            Unsere Preise
+        </h3>
+    </div>
+
+    <div id="main-00-0-collapse" class="card-collapse collapse" data-parent="#cc-main-00">
+        <div class="card-body">
+            <p>Sie finden jetzt alle Preise auf der <a href="/preise.html">Preise-Seite</a>!</p>
+
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-link" class="collapsed" data-toggle="collapse" data-target="#main-00-00-collapse">
+            Unser Funktionsumfang
+        </h3>
+    </div>
+
+    <div id="main-00-00-collapse" class="card-collapse collapse" data-parent="#cc-main-00">
+        <div class="card-body">
+            <p>Unter &quot;<a href="/wie-es-funktioniert.html">Wie es funktioniert</a>&quot; in der Kopfzeile&nbsp;finden Sie viele n&uuml;tzliche Information, in der Fu&szlig;teile finden Sie unter &quot;Unsere Module&quot; unsere Funktionen detailliert aufgelistet und&nbsp;thematisch sortiert.</p>
+
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-link" class="collapsed" data-toggle="collapse" data-target="#main-00-01-collapse">
+            Unsere Anwendungshilfe
+        </h3>
+    </div>
+
+    <div id="main-00-01-collapse" class="card-collapse collapse" data-parent="#cc-main-00">
+        <div class="card-body">
+            <p><a href="/anwendung.html">Unsere Anwendungshilfe ist direkt abzurufen</a>.</p>
+
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-link" class="collapsed" data-toggle="collapse" data-target="#main-00-02-collapse">
+            Weitere FAQs
+        </h3>
+    </div>
+
+    <div id="main-00-02-collapse" class="card-collapse collapse" data-parent="#cc-main-00">
+        <div class="card-body">
+            <p>Weiter zu den <a href="/faq.html">FAQs</a></p>
+
+        </div>
+    </div>
+</div>
+  </div>
+  </section>
+
+
+</main>
+
+<footer>
+    <section class="footer-sitemap">
+  <div class="container" id="main-footer">
+    <div class="row">
+      <div class="col">
+        <h2>Digitale Buchhaltung f&uuml;r &Ouml;sterreich</h2>
+
+<p style="font-size: smaller;"><i class="fa-regular fa-gavel" style="width: 15px;"></i>&nbsp;<a href="/registrierkassenpflicht.html">RKSV konform</a><br />
+<i class="fa-regular fa-section" style="width: 15px;"></i>&nbsp;<a href="/buchhaltung/bao.html">BAO konform</a><br />
+<i class="fa-regular fa-location-dot" style="width: 15px;"></i>&nbsp;<a href="/datenschutz.html">100 % &Ouml;sterreich 🇦🇹</a></p>
+
+      </div>
+      <div class="col">
+        <h3>HILFREICHE LINKS</h3>
+
+<p><a href="/news-blog.html">News Blog</a><br />
+<a href="https://app.freefinance.at/login.xhtml" id="loginLinkFooter">Login</a><br />
+<a href="/registrieren.html">Registrieren</a><br />
+<a href="/preise.html">Unsere Preise</a><br />
+<a href="/fuer-wen/berater.html">Berater &amp; Buchhalter</a><br />
+<a href="/affiliate.html">Affiliate Partner</a><br />
+<a href="/partner.html">Unsere Partner</a><br />
+<a href="/kunden-erfahrungen.html">Kunden Erfahrungen</a></p>
+
+      </div>
+      <div class="col">
+        <h3>UNSERE APPS</h3>
+
+<p><a href="/apps/manubu-pos.html">Registrierkassa</a><br />
+<a href="/apps/manumeter.html">manumeter</a><br />
+<a href="/apps/papercut.html">PaperCut</a></p>
+
+<h3>DETAILS ZU</h3>
+
+<p><a href="/funktionen/reisekosten.html">Reisekosten</a><br />
+<a href="/funktionen/doku-archiv.html">Doku-Archiv</a></p>
+
+      </div>
+      <div class="col">
+        <h3>SERVICE</h3>
+
+<p><a aria-label="Kontaktformular" data-target="#contact-modal" data-toggle="modal" href="#">Mo - Fr. 8:00 - 18:00 per Mail</a></p>
+
+<p><a href="/faq.html">FAQ</a><br />
+<a href="/anwendung.html">Anwendungshilfe</a><br />
+<a href="/videos.html">Tutorial Videos</a><br />
+<a href="/schulungen.html">Schulungen</a><br />
+<a href="/schnittstellen.html">Schnittstellen</a><br />
+<a href="https://www.freefinance.com/developer">Developer API</a></p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="footer-topics">
+    <div class="container">
+      <div class="row">
+        <ul class="topicList">
+          <li class="blog-heading">Unsere Themen</li>
+            <li><a href="/fakturierung.html">Fakturierung</a></li>
+            <li><a href="/steuern.html">Steuern &amp; Abgaben</a></li>
+            <li><a href="/buchhaltung.html">Buchhaltung</a></li>
+            <li><a href="/betriebsausgaben.html">Betriebsausgaben I Werbungskosten</a></li>
+            <li><a href="/betriebseinnahmen.html">Betriebseinnahmen</a></li>
+            <li><a href="/kleinunternehmer.html">Kleinunternehmer</a></li>
+            <li><a href="/steuerberater.html">Steuerberater</a></li>
+            <li><a href="/buchhalter.html">Buchhalter</a></li>
+            <li><a href="/vermietung.html">Vermietung &amp; Verpachtung</a></li>
+            <li><a href="/registrierkassenpflicht.html">Registrierkassenpflicht</a></li>
+            <li><a href="/mitarbeiter.html">Mitarbeiter</a></li>
+            <li><a href="/foerderungen.html">Förderungen</a></li>
+            <li><a href="/kostenarten.html">Kostenarten</a></li>
+            <li><a href="/kostenrechnung.html">Kostenrechnung</a></li>
+            <li><a href="/selbststaendig-machen.html">Selbstständig machen</a></li>
+            <li><a href="/rechtsformen.html">Rechtsformen</a></li>
+            <li><a href="/versicherungen.html">Versicherungen</a></li>
+            <li><a href="/abschreibungen.html">Abschreibungen</a></li>
+            <li><a href="/firmenauto.html">Firmenauto</a></li>
+            <li><a href="/reisekosten.html">Reisekosten</a></li>
+            <li><a href="/zoll-und-logistik.html">Zoll &amp; Logistik</a></li>
+            <li><a href="/verein.html">Verein &amp; Vereinswesen</a></li>
+            <li><a href="/zahlungsverkehr.html">Zahlungsverkehr</a></li>
+            <li><a href="/kennzahlen.html">Kennzahlen</a></li>
+            <li><a href="/buchhaltungsprogramm-oesterreich.html">Buchhaltungsprogramm</a></li>
+            <li><a href="/rechnungsprogramm-oesterreich.html">Rechnungsprogramm</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+<section class="footer-menu bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-3 bottom-nav">
+                <ul>
+                    <li><a href="https://www.manubu.com"> &copy; manubu 2025</a>
+                        <br/><a href="https://www.magnolia-cms.com/" style="color: #9a9a9a; font-size:12px;" target="_blank" rel="nofollow noopener">powered by magnolia cms</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9 bottom-nav customRight">
+            <ul>
+	<li><a aria-label="Wechsle zu Instagram" href="https://www.instagram.com/freefinance.official/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+	<li><a aria-label="Wechsle zu Facebook" href="https://www.facebook.com/FreeFinance" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+	<li><a aria-label="Wechsle zu LinkedIn" href="https://www.linkedin.com/showcase/freefinance" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+	<li><a aria-label="Kontaktformular" data-target="#contact-modal" data-toggle="modal" href="#"><i class="far fa-envelope" aria-hidden="true"></i></a></li>
+	<li><a href="/faq.html">FAQ</a></li>
+	<li><a href="/about.html">About</a></li>
+	<li><a href="/agb.html">AGB</a></li>
+	<li><a href="/datenschutz.html">Datenschutzerkl&auml;rung / DSGVO</a></li>
+	<li><a href="/impressum.html">Impressum</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+</footer>
+
+  <div id="contact-modal" class="modal fade" role="dialog" data-contact-form>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">Kontakt</span>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form action="/modal/0.json" method="post" name="frm-contact" class="contact-form" data-parsley-validate=""
+                data-content-id="e642e07b-7455-45d7-a4eb-1f750c122eea">
+            <div class="form-error d-none">
+              <p>Leider ist ein Fehler passiert.</p>
+
+<p>Bitte versuchen Sie es sp&auml;ter erneut.</p>
+
+            </div>
+            <div class="form-group">
+              <label for="frm-contact-firstName">Vorname *</label>
+              <input placeholder="Vorname *" id="frm-contact-firstName" name="firstName" value="" class="form-control" title="Vorname *"
+                     type="text" required>
+            </div>
+            <div class="form-group">
+              <label for="frm-contact-lastName">Nachname *</label>
+              <input placeholder="Nachname *" id="frm-contact-lastName" name="lastName" value="" class="form-control" title="Nachname *"
+                     type="text" required>
+            </div>
+            <div class="form-group">
+              <label for="frm-contact-email">E-Mail-Adresse *</label>
+              <input placeholder="E-Mail-Adresse *" id="frm-contact-email" name="email" value="" class="form-control" title="E-Mail-Adresse *"
+                     type="email" required>
+            </div>
+            <div class="form-group">
+              <label for="frm-contact-subject">Betreff *</label>
+              <input placeholder="Betreff *" id="frm-contact-subject" name="subject" class="form-control" title="Betreff *"
+                     type="text" value="Allgemeine Anfrage" required>
+            </div>
+            <div class="form-group">
+              <label for="frm-contact-message">Nachricht *</label>
+              <textarea placeholder="Nachricht *" id="frm-contact-message" name="message" class="form-control" title="Nachricht *"
+                        type="text" rows="5" required> </textarea>
+            </div>
+            <div class="form-group d-none">
+              <label for="frm-contact-homepage">Homepage (Bitte nicht ändern)</label>
+              <input id="frm-contact-homepage" name="homepage" class="form-control no-validation" title="Betreff *" required
+                     type="text" value="https://">
+            </div>
+            <div class="form-group d-none">
+              <label for="frm-contact-confirm-email">Email (Bitte leer lassen)</label>
+              <input id="frm-contact-confirm-email" name="confirm-email" class="form-control no-validation" title="Betreff *" required
+                     type="text">
+            </div>
+            <div class="form-group modal-footer">
+              <span class="modal-footer-text"></span>
+              <div class="actions">
+                <button type="reset" class="mt-button mt-button-secondary reset" data-dismiss="modal">Abbrechen</button>
+                <button type="submit" class="mt-button mt-button-primary submit">Senden</button>
+
+              </div>
+            </div>
+          </form>
+          <div class="form-success d-none">
+            <p>Erfolgreich verschickt!</p>
+
+            <div class="text-right">
+              <button type="reset" class="mt-button mt-button-primary" data-dismiss="modal">Schließen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<section aria-hidden="true" class="content regButton">
+    <div class="regButtonContainer">
+      <a href="https://www.freefinance.at/registrieren"><button class="btn"><i class="far"></i></button></a>
+    </div>
+</section>
+
+
+
+                    <script src="/.resources/freefinance/resources/js/freefinance.bundle~2025-12-04-20-19-36-000~cache.js" async defer></script>
+</body>
+</html>

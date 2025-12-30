@@ -1,0 +1,4893 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://freefinance-dev.github.io/#_authentication -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="author" content="support@freefinance.at">
+<title>FreeFinance REST API</title>
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block
+}
+
+audio, canvas, video {
+    display: inline-block
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+[hidden], template {
+    display: none
+}
+
+script {
+    display: none !important
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+a {
+    background: transparent
+}
+
+a:focus {
+    outline: thin dotted
+}
+
+a:active, a:hover {
+    outline: 0
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+abbr[title] {
+    border-bottom: 1px dotted
+}
+
+b, strong {
+    font-weight: bold
+}
+
+dfn {
+    font-style: italic
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0
+}
+
+mark {
+    background: #ff0;
+    color: #000
+}
+
+code, kbd, pre, samp {
+    font-family: monospace;
+    font-size: 1em
+}
+
+pre {
+    white-space: pre-wrap
+}
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019"
+}
+
+small {
+    font-size: 80%
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sup {
+    top: -.5em
+}
+
+sub {
+    bottom: -.25em
+}
+
+img {
+    border: 0
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+figure {
+    margin: 0
+}
+
+fieldset {
+    border: 1px solid silver;
+    margin: 0 2px;
+    padding: .35em .625em .75em
+}
+
+legend {
+    border: 0;
+    padding: 0
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0
+}
+
+button, input {
+    line-height: normal
+}
+
+button, select {
+    text-transform: none
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+
+button[disabled], html input[disabled] {
+    cursor: default
+}
+
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box
+}
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0;
+    padding: 0
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html, body {
+    font-size: 100%
+}
+
+body {
+    background: #fff;
+    color: rgba(0, 0, 0, .8);
+    padding: 0;
+    margin: 0;
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    position: relative;
+    cursor: auto;
+    tab-size: 4;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased
+}
+
+a:hover {
+    cursor: pointer
+}
+
+img, object, embed {
+    max-width: 100%;
+    height: auto
+}
+
+object, embed {
+    height: 100%
+}
+
+img {
+    -ms-interpolation-mode: bicubic
+}
+
+.left {
+    float: left !important
+}
+
+.right {
+    float: right !important
+}
+
+.text-left {
+    text-align: left !important
+}
+
+.text-right {
+    text-align: right !important
+}
+
+.text-center {
+    text-align: center !important
+}
+
+.text-justify {
+    text-align: justify !important
+}
+
+.hide {
+    display: none
+}
+
+img, object, svg {
+    display: inline-block;
+    vertical-align: middle
+}
+
+textarea {
+    height: auto;
+    min-height: 50px
+}
+
+select {
+    width: 100%
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto
+}
+
+.spread {
+    width: 100%
+}
+
+p.lead, .paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p {
+    font-size: 1.21875em;
+    line-height: 1.6
+}
+
+.subheader, .admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title {
+    line-height: 1.45;
+    color: #23297a;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: .25em
+}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, pre, form, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    direction: ltr
+}
+
+a {
+    color: #2156a5;
+    text-decoration: underline;
+    line-height: inherit
+}
+
+a:hover, a:focus {
+    color: #1d4b8f
+}
+
+a img {
+    border: none
+}
+
+p {
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    text-rendering: optimizeLegibility
+}
+
+p aside {
+    font-size: .875em;
+    line-height: 1.35;
+    font-style: italic
+}
+
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 {
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #242eba;
+    text-rendering: optimizeLegibility;
+    margin-top: 1em;
+    margin-bottom: .5em;
+    line-height: 1.0125em
+}
+
+h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small {
+    font-size: 60%;
+    color: #e99b8f;
+    line-height: 0
+}
+
+h1 {
+    font-size: 2.125em
+}
+
+h2 {
+    font-size: 1.6875em
+}
+
+h3, #toctitle, .sidebarblock > .content > .title {
+    font-size: 1.375em
+}
+
+h4, h5 {
+    font-size: 1.125em
+}
+
+h6 {
+    font-size: 1em
+}
+
+hr {
+    border: solid #ddddd8;
+    border-width: 1px 0 0;
+    clear: both;
+    margin: 1.25em 0 1.1875em;
+    height: 0
+}
+
+em, i {
+    font-style: italic;
+    line-height: inherit
+}
+
+strong, b {
+    font-weight: bold;
+    line-height: inherit
+}
+
+small {
+    font-size: 60%;
+    line-height: inherit
+}
+
+code {
+    font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
+    font-weight: 400;
+    color: rgba(0, 0, 0, .9)
+}
+
+ul, ol, dl {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    list-style-position: outside;
+    font-family: inherit
+}
+
+ul, ol, ul.no-bullet, ol.no-bullet {
+    margin-left: 1.5em
+}
+
+ul li ul, ul li ol {
+    margin-left: 1.25em;
+    margin-bottom: 0;
+    font-size: 1em
+}
+
+ul.square li ul, ul.circle li ul, ul.disc li ul {
+    list-style: inherit
+}
+
+ul.square {
+    list-style-type: square
+}
+
+ul.circle {
+    list-style-type: circle
+}
+
+ul.disc {
+    list-style-type: disc
+}
+
+ul.no-bullet {
+    list-style: none
+}
+
+ol li ul, ol li ol {
+    margin-left: 1.25em;
+    margin-bottom: 0
+}
+
+dl dt {
+    margin-bottom: .3125em;
+    font-weight: bold
+}
+
+dl dd {
+    margin-bottom: 1.25em
+}
+
+abbr, acronym {
+    text-transform: uppercase;
+    font-size: 90%;
+    color: rgba(0, 0, 0, .8);
+    border-bottom: 1px dotted #ddd;
+    cursor: help
+}
+
+abbr {
+    text-transform: none
+}
+
+blockquote {
+    margin: 0 0 1.25em;
+    padding: .5625em 1.25em 0 1.1875em;
+    border-left: 1px solid #ddd
+}
+
+blockquote cite {
+    display: block;
+    font-size: .9375em;
+    color: rgba(0, 0, 0, .6)
+}
+
+blockquote cite:before {
+    content: "\2014 \0020"
+}
+
+blockquote cite a, blockquote cite a:visited {
+    color: rgba(0, 0, 0, .6)
+}
+
+blockquote, blockquote p {
+    line-height: 1.6;
+    color: rgba(0, 0, 0, .85)
+}
+
+@media only screen and (min-width: 768px) {
+    h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 {
+        line-height: 1.2
+    }
+
+    h1 {
+        font-size: 2.75em
+    }
+
+    h2 {
+        font-size: 2.3125em
+    }
+
+    h3, #toctitle, .sidebarblock > .content > .title {
+        font-size: 1.6875em
+    }
+
+    h4 {
+        font-size: 1.4375em
+    }
+}
+
+table {
+    background: #fff;
+    margin-bottom: 1.25em;
+    border: solid 1px #dedede
+}
+
+table thead, table tfoot {
+    background: #f7f8f7;
+    font-weight: bold
+}
+
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td {
+    padding: .5em .625em .625em;
+    font-size: inherit;
+    color: rgba(0, 0, 0, .8);
+    text-align: left
+}
+
+table tr th, table tr td {
+    padding: .5625em .625em;
+    font-size: inherit;
+    color: rgba(0, 0, 0, .8)
+}
+
+table tr.even, table tr.alt, table tr:nth-of-type(even) {
+    background: #f8f8f7
+}
+
+table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoot tr td {
+    display: table-cell;
+    line-height: 1.6
+}
+
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 {
+    line-height: 1.2;
+    word-spacing: -.05em
+}
+
+h1 strong, h2 strong, h3 strong, #toctitle strong, .sidebarblock > .content > .title strong, h4 strong, h5 strong, h6 strong {
+    font-weight: 400
+}
+
+.clearfix:before, .clearfix:after, .float-group:before, .float-group:after {
+    content: " ";
+    display: table
+}
+
+.clearfix:after, .float-group:after {
+    clear: both
+}
+
+*:not(pre) > code {
+    font-size: .9375em;
+    font-style: normal !important;
+    letter-spacing: 0;
+    padding: .1em .5ex;
+    word-spacing: -.15em;
+    background-color: #f7f7f8;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    line-height: 1.45;
+    text-rendering: optimizeSpeed;
+    word-wrap: break-word
+}
+
+*:not(pre) > code.nobreak {
+    word-wrap: normal
+}
+
+*:not(pre) > code.nowrap {
+    white-space: nowrap
+}
+
+pre, pre > code {
+    line-height: 1.45;
+    color: rgba(0, 0, 0, .9);
+    font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
+    font-weight: 400;
+    text-rendering: optimizeSpeed
+}
+
+em em {
+    font-style: normal
+}
+
+strong strong {
+    font-weight: 400
+}
+
+.keyseq {
+    color: rgba(51, 51, 51, .8)
+}
+
+kbd {
+    font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
+    display: inline-block;
+    color: rgba(0, 0, 0, .8);
+    font-size: .65em;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .2), 0 0 0 .1em white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .2), 0 0 0 .1em #fff inset;
+    margin: 0 .15em;
+    padding: .2em .5em;
+    vertical-align: middle;
+    position: relative;
+    top: -.1em;
+    white-space: nowrap
+}
+
+.keyseq kbd:first-child {
+    margin-left: 0
+}
+
+.keyseq kbd:last-child {
+    margin-right: 0
+}
+
+.menuseq, .menu {
+    color: rgba(0, 0, 0, .8)
+}
+
+b.button:before, b.button:after {
+    position: relative;
+    top: -1px;
+    font-weight: 400
+}
+
+b.button:before {
+    content: "[";
+    padding: 0 3px 0 2px
+}
+
+b.button:after {
+    content: "]";
+    padding: 0 2px 0 3px
+}
+
+p a > code:hover {
+    color: rgba(0, 0, 0, .9)
+}
+
+#header, #content, #footnotes, #footer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 62.5em;
+    *zoom: 1;
+    position: relative;
+    padding-left: .9375em;
+    padding-right: .9375em
+}
+
+#header:before, #header:after, #content:before, #content:after, #footnotes:before, #footnotes:after, #footer:before, #footer:after {
+    content: " ";
+    display: table
+}
+
+#header:after, #content:after, #footnotes:after, #footer:after {
+    clear: both
+}
+
+#content {
+    margin-top: 1.25em
+}
+
+#content:before {
+    content: none
+}
+
+#header > h1:first-child {
+    color: rgba(0, 0, 0, .85);
+    margin-top: 2.25rem;
+    margin-bottom: 0
+}
+
+#header > h1:first-child + #toc {
+    margin-top: 8px;
+    border-top: 1px solid #ddddd8
+}
+
+#header > h1:only-child, body.toc2 #header > h1:nth-last-child(2) {
+    border-bottom: 1px solid #ddddd8;
+    padding-bottom: 8px
+}
+
+#header .details {
+    border-bottom: 1px solid #ddddd8;
+    line-height: 1.45;
+    padding-top: .25em;
+    padding-bottom: .25em;
+    padding-left: .25em;
+    color: rgba(0, 0, 0, .6);
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap
+}
+
+#header .details span:first-child {
+    margin-left: -.125em
+}
+
+#header .details span.email a {
+    color: rgba(0, 0, 0, .85)
+}
+
+#header .details br {
+    display: none
+}
+
+#header .details br + span:before {
+    content: "\00a0\2013\00a0"
+}
+
+#header .details br + span.author:before {
+    content: "\00a0\22c5\00a0";
+    color: rgba(0, 0, 0, .85)
+}
+
+#header .details br + span#revremark:before {
+    content: "\00a0|\00a0"
+}
+
+#header #revnumber {
+    text-transform: capitalize
+}
+
+#header #revnumber:after {
+    content: "\00a0"
+}
+
+#content > h1:first-child:not([class]) {
+    color: rgba(0, 0, 0, .85);
+    border-bottom: 1px solid #ddddd8;
+    padding-bottom: 8px;
+    margin-top: 0;
+    padding-top: 1rem;
+    margin-bottom: 1.25rem
+}
+
+#toc {
+    border-bottom: 1px solid #efefed;
+    padding-bottom: .5em
+}
+
+#toc > ul {
+    margin-left: .125em
+}
+
+#toc ul.sectlevel0 > li > a {
+    font-style: italic
+}
+
+#toc ul.sectlevel0 ul.sectlevel1 {
+    margin: .5em 0
+}
+
+#toc ul {
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    list-style-type: none
+}
+
+#toc li {
+    line-height: 1.3334;
+    margin-top: .3334em
+}
+
+#toc a {
+    text-decoration: none
+}
+
+#toc a:active {
+    text-decoration: underline
+}
+
+#toctitle {
+    color: #242eba;
+    font-size: 1.2em
+}
+
+@media only screen and (min-width: 768px) {
+    #toctitle {
+        font-size: 1.375em
+    }
+
+    body.toc2 {
+        padding-left: 15em;
+        padding-right: 0
+    }
+
+    #toc.toc2 {
+        margin-top: 0 !important;
+        background-color: #f8f8f7;
+        position: fixed;
+        width: 15em;
+        left: 0;
+        top: 0;
+        border-right: 1px solid #efefed;
+        border-top-width: 0 !important;
+        border-bottom-width: 0 !important;
+        z-index: 1000;
+        padding: 1.25em 1em;
+        height: 100%;
+        overflow: auto
+    }
+
+    #toc.toc2 #toctitle {
+        margin-top: 0;
+        margin-bottom: .8rem;
+        font-size: 1.2em
+    }
+
+    #toc.toc2 > ul {
+        font-size: .9em;
+        margin-bottom: 0
+    }
+
+    #toc.toc2 ul ul {
+        margin-left: 0;
+        padding-left: 1em
+    }
+
+    #toc.toc2 ul.sectlevel0 ul.sectlevel1 {
+        padding-left: 0;
+        margin-top: .5em;
+        margin-bottom: .5em
+    }
+
+    body.toc2.toc-right {
+        padding-left: 0;
+        padding-right: 15em
+    }
+
+    body.toc2.toc-right #toc.toc2 {
+        border-right-width: 0;
+        border-left: 1px solid #efefed;
+        left: auto;
+        right: 0
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    body.toc2 {
+        padding-left: 20em;
+        padding-right: 0
+    }
+
+    #toc.toc2 {
+        width: 20em
+    }
+
+    #toc.toc2 #toctitle {
+        font-size: 1.375em
+    }
+
+    #toc.toc2 > ul {
+        font-size: .95em
+    }
+
+    #toc.toc2 ul ul {
+        padding-left: 1.25em
+    }
+
+    body.toc2.toc-right {
+        padding-left: 0;
+        padding-right: 20em
+    }
+}
+
+#content #toc {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e0e0dc;
+    margin-bottom: 1.25em;
+    padding: 1.25em;
+    background: #f8f8f7;
+    -webkit-border-radius: 4px;
+    border-radius: 4px
+}
+
+#content #toc > :first-child {
+    margin-top: 0
+}
+
+#content #toc > :last-child {
+    margin-bottom: 0
+}
+
+#footer {
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    padding: 1.25em
+}
+
+#footer-text {
+    color: rgba(255, 255, 255, .8);
+    line-height: 1.44
+}
+
+.sect1 {
+    padding-bottom: .625em
+}
+
+@media only screen and (min-width: 768px) {
+    .sect1 {
+        padding-bottom: 1.25em
+    }
+}
+
+.sect1 + .sect1 {
+    border-top: 1px solid #efefed
+}
+
+#content h1 > a.anchor, h2 > a.anchor, h3 > a.anchor, #toctitle > a.anchor, .sidebarblock > .content > .title > a.anchor, h4 > a.anchor, h5 > a.anchor, h6 > a.anchor {
+    position: absolute;
+    z-index: 1001;
+    width: 1.5ex;
+    margin-left: -1.5ex;
+    display: block;
+    text-decoration: none !important;
+    visibility: hidden;
+    text-align: center;
+    font-weight: 400
+}
+
+#content h1 > a.anchor:before, h2 > a.anchor:before, h3 > a.anchor:before, #toctitle > a.anchor:before, .sidebarblock > .content > .title > a.anchor:before, h4 > a.anchor:before, h5 > a.anchor:before, h6 > a.anchor:before {
+    content: "\00A7";
+    font-size: .85em;
+    display: block;
+    padding-top: .1em
+}
+
+#content h1:hover > a.anchor, #content h1 > a.anchor:hover, h2:hover > a.anchor, h2 > a.anchor:hover, h3:hover > a.anchor, #toctitle:hover > a.anchor, .sidebarblock > .content > .title:hover > a.anchor, h3 > a.anchor:hover, #toctitle > a.anchor:hover, .sidebarblock > .content > .title > a.anchor:hover, h4:hover > a.anchor, h4 > a.anchor:hover, h5:hover > a.anchor, h5 > a.anchor:hover, h6:hover > a.anchor, h6 > a.anchor:hover {
+    visibility: visible
+}
+
+#content h1 > a.link, h2 > a.link, h3 > a.link, #toctitle > a.link, .sidebarblock > .content > .title > a.link, h4 > a.link, h5 > a.link, h6 > a.link {
+    color: #ba3925;
+    text-decoration: none
+}
+
+#content h1 > a.link:hover, h2 > a.link:hover, h3 > a.link:hover, #toctitle > a.link:hover, .sidebarblock > .content > .title > a.link:hover, h4 > a.link:hover, h5 > a.link:hover, h6 > a.link:hover {
+    color: #a53221
+}
+
+.audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock {
+    margin-bottom: 1.25em
+}
+
+.admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title {
+    text-rendering: optimizeLegibility;
+    text-align: left;
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-size: 1rem;
+    font-style: italic
+}
+
+table.tableblock > caption.title {
+    white-space: nowrap;
+    overflow: visible;
+    max-width: 0
+}
+
+.paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p {
+    color: rgba(0, 0, 0, .85)
+}
+
+table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p {
+    font-size: inherit
+}
+
+.admonitionblock > table {
+    border-collapse: separate;
+    border: 0;
+    background: none;
+    width: 100%
+}
+
+.admonitionblock > table td.icon {
+    text-align: center;
+    width: 80px
+}
+
+.admonitionblock > table td.icon img {
+    max-width: initial
+}
+
+.admonitionblock > table td.icon .title {
+    font-weight: bold;
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    text-transform: uppercase
+}
+
+.admonitionblock > table td.content {
+    padding-left: 1.125em;
+    padding-right: 1.25em;
+    border-left: 1px solid #ddddd8;
+    color: rgba(0, 0, 0, .6)
+}
+
+.admonitionblock > table td.content > :last-child > :last-child {
+    margin-bottom: 0
+}
+
+.exampleblock > .content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e6e6e6;
+    margin-bottom: 1.25em;
+    padding: 1.25em;
+    background: #fff;
+    -webkit-border-radius: 4px;
+    border-radius: 4px
+}
+
+.exampleblock > .content > :first-child {
+    margin-top: 0
+}
+
+.exampleblock > .content > :last-child {
+    margin-bottom: 0
+}
+
+.sidebarblock {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e0e0dc;
+    margin-bottom: 1.25em;
+    padding: 1.25em;
+    background: #f8f8f7;
+    -webkit-border-radius: 4px;
+    border-radius: 4px
+}
+
+.sidebarblock > :first-child {
+    margin-top: 0
+}
+
+.sidebarblock > :last-child {
+    margin-bottom: 0
+}
+
+.sidebarblock > .content > .title {
+    color: #7a2518;
+    margin-top: 0;
+    text-align: center
+}
+
+.exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child {
+    margin-bottom: 0
+}
+
+.literalblock pre, .listingblock pre:not(.highlight), .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
+    background: #f7f7f8
+}
+
+.sidebarblock .literalblock pre, .sidebarblock .listingblock pre:not(.highlight), .sidebarblock .listingblock pre[class="highlight"], .sidebarblock .listingblock pre[class^="highlight "], .sidebarblock .listingblock pre.CodeRay, .sidebarblock .listingblock pre.prettyprint {
+    background: #f2f1f1
+}
+
+.literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    word-wrap: break-word;
+    padding: 1em;
+    font-size: .8125em
+}
+
+.literalblock pre.nowrap, .literalblock pre[class].nowrap, .listingblock pre.nowrap, .listingblock pre[class].nowrap {
+    overflow-x: auto;
+    white-space: pre;
+    word-wrap: normal
+}
+
+@media only screen and (min-width: 768px) {
+    .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] {
+        font-size: .90625em
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .literalblock pre, .literalblock pre[class], .listingblock pre, .listingblock pre[class] {
+        font-size: 1em
+    }
+}
+
+.literalblock.output pre {
+    color: #f7f7f8;
+    background-color: rgba(0, 0, 0, .9)
+}
+
+.listingblock pre.highlightjs {
+    padding: 0
+}
+
+.listingblock pre.highlightjs > code {
+    padding: 1em;
+    -webkit-border-radius: 4px;
+    border-radius: 4px
+}
+
+.listingblock pre.prettyprint {
+    border-width: 0
+}
+
+.listingblock > .content {
+    position: relative
+}
+
+.listingblock code[data-lang]:before {
+    display: none;
+    content: attr(data-lang);
+    position: absolute;
+    font-size: .75em;
+    top: .425rem;
+    right: .5rem;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #999
+}
+
+.listingblock:hover code[data-lang]:before {
+    display: block
+}
+
+.listingblock.terminal pre .command:before {
+    content: attr(data-prompt);
+    padding-right: .5em;
+    color: #999
+}
+
+.listingblock.terminal pre .command:not([data-prompt]):before {
+    content: "$"
+}
+
+table.pyhltable {
+    border-collapse: separate;
+    border: 0;
+    margin-bottom: 0;
+    background: none
+}
+
+table.pyhltable td {
+    vertical-align: top;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.45
+}
+
+table.pyhltable td.code {
+    padding-left: .75em;
+    padding-right: 0
+}
+
+pre.pygments .lineno, table.pyhltable td:not(.code) {
+    color: #999;
+    padding-left: 0;
+    padding-right: .5em;
+    border-right: 1px solid #ddddd8
+}
+
+pre.pygments .lineno {
+    display: inline-block;
+    margin-right: .25em
+}
+
+table.pyhltable .linenodiv {
+    background: none !important;
+    padding-right: 0 !important
+}
+
+.quoteblock {
+    margin: 0 1em 1.25em 1.5em;
+    display: table
+}
+
+.quoteblock > .title {
+    margin-left: -1.5em;
+    margin-bottom: .75em
+}
+
+.quoteblock blockquote, .quoteblock blockquote p {
+    color: rgba(0, 0, 0, .85);
+    font-size: 1.15rem;
+    line-height: 1.75;
+    word-spacing: .1em;
+    letter-spacing: 0;
+    font-style: italic;
+    text-align: justify
+}
+
+.quoteblock blockquote {
+    margin: 0;
+    padding: 0;
+    border: 0
+}
+
+.quoteblock blockquote:before {
+    content: "\201c";
+    float: left;
+    font-size: 2.75em;
+    font-weight: bold;
+    line-height: .6em;
+    margin-left: -.6em;
+    color: #7a2518;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .1)
+}
+
+.quoteblock blockquote > .paragraph:last-child p {
+    margin-bottom: 0
+}
+
+.quoteblock .attribution {
+    margin-top: .5em;
+    margin-right: .5ex;
+    text-align: right
+}
+
+.quoteblock .quoteblock {
+    margin-left: 0;
+    margin-right: 0;
+    padding: .5em 0;
+    border-left: 3px solid rgba(0, 0, 0, .6)
+}
+
+.quoteblock .quoteblock blockquote {
+    padding: 0 0 0 .75em
+}
+
+.quoteblock .quoteblock blockquote:before {
+    display: none
+}
+
+.verseblock {
+    margin: 0 1em 1.25em 1em
+}
+
+.verseblock pre {
+    font-family: "Open Sans", "DejaVu Sans", sans;
+    font-size: 1.15rem;
+    color: rgba(0, 0, 0, .85);
+    font-weight: 300;
+    text-rendering: optimizeLegibility
+}
+
+.verseblock pre strong {
+    font-weight: 400
+}
+
+.verseblock .attribution {
+    margin-top: 1.25rem;
+    margin-left: .5ex
+}
+
+.quoteblock .attribution, .verseblock .attribution {
+    font-size: .9375em;
+    line-height: 1.45;
+    font-style: italic
+}
+
+.quoteblock .attribution br, .verseblock .attribution br {
+    display: none
+}
+
+.quoteblock .attribution cite, .verseblock .attribution cite {
+    display: block;
+    letter-spacing: -.025em;
+    color: rgba(0, 0, 0, .6)
+}
+
+.quoteblock.abstract {
+    margin: 0 0 1.25em 0;
+    display: block
+}
+
+.quoteblock.abstract blockquote, .quoteblock.abstract blockquote p {
+    text-align: left;
+    word-spacing: 0
+}
+
+.quoteblock.abstract blockquote:before, .quoteblock.abstract blockquote p:first-of-type:before {
+    display: none
+}
+
+table.tableblock {
+    max-width: 100%;
+    border-collapse: separate
+}
+
+table.tableblock td > .paragraph:last-child p > p:last-child, table.tableblock th > p:last-child, table.tableblock td > p:last-child {
+    margin-bottom: 0
+}
+
+table.tableblock, th.tableblock, td.tableblock {
+    border: 0 solid #dedede
+}
+
+table.grid-all th.tableblock, table.grid-all td.tableblock {
+    border-width: 0 1px 1px 0
+}
+
+table.grid-all tfoot > tr > th.tableblock, table.grid-all tfoot > tr > td.tableblock {
+    border-width: 1px 1px 0 0
+}
+
+table.grid-cols th.tableblock, table.grid-cols td.tableblock {
+    border-width: 0 1px 0 0
+}
+
+table.grid-all * > tr > .tableblock:last-child, table.grid-cols * > tr > .tableblock:last-child {
+    border-right-width: 0
+}
+
+table.grid-rows th.tableblock, table.grid-rows td.tableblock {
+    border-width: 0 0 1px 0
+}
+
+table.grid-all tbody > tr:last-child > th.tableblock, table.grid-all tbody > tr:last-child > td.tableblock, table.grid-all thead:last-child > tr > th.tableblock, table.grid-rows tbody > tr:last-child > th.tableblock, table.grid-rows tbody > tr:last-child > td.tableblock, table.grid-rows thead:last-child > tr > th.tableblock {
+    border-bottom-width: 0
+}
+
+table.grid-rows tfoot > tr > th.tableblock, table.grid-rows tfoot > tr > td.tableblock {
+    border-width: 1px 0 0 0
+}
+
+table.frame-all {
+    border-width: 1px
+}
+
+table.frame-sides {
+    border-width: 0 1px
+}
+
+table.frame-topbot {
+    border-width: 1px 0
+}
+
+th.halign-left, td.halign-left {
+    text-align: left
+}
+
+th.halign-right, td.halign-right {
+    text-align: right
+}
+
+th.halign-center, td.halign-center {
+    text-align: center
+}
+
+th.valign-top, td.valign-top {
+    vertical-align: top
+}
+
+th.valign-bottom, td.valign-bottom {
+    vertical-align: bottom
+}
+
+th.valign-middle, td.valign-middle {
+    vertical-align: middle
+}
+
+table thead th, table tfoot th {
+    font-weight: bold
+}
+
+tbody tr th {
+    display: table-cell;
+    line-height: 1.6;
+    background: #f7f8f7
+}
+
+tbody tr th, tbody tr th p, tfoot tr th, tfoot tr th p {
+    color: rgba(0, 0, 0, .8);
+    font-weight: bold
+}
+
+p.tableblock > code:only-child {
+    background: none;
+    padding: 0
+}
+
+p.tableblock {
+    font-size: 1em
+}
+
+td > div.verse {
+    white-space: pre
+}
+
+ol {
+    margin-left: 1.75em
+}
+
+ul li ol {
+    margin-left: 1.5em
+}
+
+dl dd {
+    margin-left: 1.125em
+}
+
+dl dd:last-child, dl dd:last-child > :last-child {
+    margin-bottom: 0
+}
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist, .olist .ulist {
+    margin-bottom: .625em
+}
+
+ul.unstyled, ol.unnumbered, ul.checklist, ul.none {
+    list-style-type: none
+}
+
+ul.unstyled, ol.unnumbered, ul.checklist {
+    margin-left: .625em
+}
+
+ul.checklist li > p:first-child > .fa-square-o:first-child, ul.checklist li > p:first-child > .fa-check-square-o:first-child {
+    width: 1em;
+    font-size: .85em
+}
+
+ul.checklist li > p:first-child > input[type="checkbox"]:first-child {
+    width: 1em;
+    position: relative;
+    top: 1px
+}
+
+ul.inline {
+    margin: 0 auto .625em auto;
+    margin-left: -1.375em;
+    margin-right: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden
+}
+
+ul.inline > li {
+    list-style: none;
+    float: left;
+    margin-left: 1.375em;
+    display: block
+}
+
+ul.inline > li > * {
+    display: block
+}
+
+.unstyled dl dt {
+    font-weight: 400;
+    font-style: normal
+}
+
+ol.arabic {
+    list-style-type: decimal
+}
+
+ol.decimal {
+    list-style-type: decimal-leading-zero
+}
+
+ol.loweralpha {
+    list-style-type: lower-alpha
+}
+
+ol.upperalpha {
+    list-style-type: upper-alpha
+}
+
+ol.lowerroman {
+    list-style-type: lower-roman
+}
+
+ol.upperroman {
+    list-style-type: upper-roman
+}
+
+ol.lowergreek {
+    list-style-type: lower-greek
+}
+
+.hdlist > table, .colist > table {
+    border: 0;
+    background: none
+}
+
+.hdlist > table > tbody > tr, .colist > table > tbody > tr {
+    background: none
+}
+
+td.hdlist1, td.hdlist2 {
+    vertical-align: top;
+    padding: 0 .625em
+}
+
+td.hdlist1 {
+    font-weight: bold;
+    padding-bottom: 1.25em
+}
+
+.literalblock + .colist, .listingblock + .colist {
+    margin-top: -.5em
+}
+
+.colist > table tr > td:first-of-type {
+    padding: 0 .75em;
+    line-height: 1
+}
+
+.colist > table tr > td:first-of-type img {
+    max-width: initial
+}
+
+.colist > table tr > td:last-of-type {
+    padding: .25em 0
+}
+
+.thumb, .th {
+    line-height: 0;
+    display: inline-block;
+    border: solid 4px #fff;
+    -webkit-box-shadow: 0 0 0 1px #ddd;
+    box-shadow: 0 0 0 1px #ddd
+}
+
+.imageblock.left, .imageblock[style*="float: left"] {
+    margin: .25em .625em 1.25em 0
+}
+
+.imageblock.right, .imageblock[style*="float: right"] {
+    margin: .25em 0 1.25em .625em
+}
+
+.imageblock > .title {
+    margin-bottom: 0
+}
+
+.imageblock.thumb, .imageblock.th {
+    border-width: 6px
+}
+
+.imageblock.thumb > .title, .imageblock.th > .title {
+    padding: 0 .125em
+}
+
+.image.left, .image.right {
+    margin-top: .25em;
+    margin-bottom: .25em;
+    display: inline-block;
+    line-height: 0
+}
+
+.image.left {
+    margin-right: .625em
+}
+
+.image.right {
+    margin-left: .625em
+}
+
+a.image {
+    text-decoration: none;
+    display: inline-block
+}
+
+a.image object {
+    pointer-events: none
+}
+
+sup.footnote, sup.footnoteref {
+    font-size: .875em;
+    position: static;
+    vertical-align: super
+}
+
+sup.footnote a, sup.footnoteref a {
+    text-decoration: none
+}
+
+sup.footnote a:active, sup.footnoteref a:active {
+    text-decoration: underline
+}
+
+#footnotes {
+    padding-top: .75em;
+    padding-bottom: .75em;
+    margin-bottom: .625em
+}
+
+#footnotes hr {
+    width: 20%;
+    min-width: 6.25em;
+    margin: -.25em 0 .75em 0;
+    border-width: 1px 0 0 0
+}
+
+#footnotes .footnote {
+    padding: 0 .375em 0 .225em;
+    line-height: 1.3334;
+    font-size: .875em;
+    margin-left: 1.2em;
+    text-indent: -1.05em;
+    margin-bottom: .2em
+}
+
+#footnotes .footnote a:first-of-type {
+    font-weight: bold;
+    text-decoration: none
+}
+
+#footnotes .footnote:last-of-type {
+    margin-bottom: 0
+}
+
+#content #footnotes {
+    margin-top: -.625em;
+    margin-bottom: 0;
+    padding: .75em 0
+}
+
+.gist .file-data > table {
+    border: 0;
+    background: #fff;
+    width: 100%;
+    margin-bottom: 0
+}
+
+.gist .file-data > table td.line-data {
+    width: 99%
+}
+
+div.unbreakable {
+    page-break-inside: avoid
+}
+
+.big {
+    font-size: larger
+}
+
+.small {
+    font-size: smaller
+}
+
+.underline {
+    text-decoration: underline
+}
+
+.overline {
+    text-decoration: overline
+}
+
+.line-through {
+    text-decoration: line-through
+}
+
+.aqua {
+    color: #00bfbf
+}
+
+.aqua-background {
+    background-color: #00fafa
+}
+
+.black {
+    color: #000
+}
+
+.black-background {
+    background-color: #000
+}
+
+.blue {
+    color: #0000bf
+}
+
+.blue-background {
+    background-color: #0000fa
+}
+
+.fuchsia {
+    color: #bf00bf
+}
+
+.fuchsia-background {
+    background-color: #fa00fa
+}
+
+.gray {
+    color: #606060
+}
+
+.gray-background {
+    background-color: #7d7d7d
+}
+
+.green {
+    color: #006000
+}
+
+.green-background {
+    background-color: #007d00
+}
+
+.lime {
+    color: #00bf00
+}
+
+.lime-background {
+    background-color: #00fa00
+}
+
+.maroon {
+    color: #600000
+}
+
+.maroon-background {
+    background-color: #7d0000
+}
+
+.navy {
+    color: #000060
+}
+
+.navy-background {
+    background-color: #00007d
+}
+
+.olive {
+    color: #606000
+}
+
+.olive-background {
+    background-color: #7d7d00
+}
+
+.purple {
+    color: #600060
+}
+
+.purple-background {
+    background-color: #7d007d
+}
+
+.red {
+    color: #bf0000
+}
+
+.red-background {
+    background-color: #fa0000
+}
+
+.silver {
+    color: #909090
+}
+
+.silver-background {
+    background-color: #bcbcbc
+}
+
+.teal {
+    color: #006060
+}
+
+.teal-background {
+    background-color: #007d7d
+}
+
+.white {
+    color: #bfbfbf
+}
+
+.white-background {
+    background-color: #fafafa
+}
+
+.yellow {
+    color: #bfbf00
+}
+
+.yellow-background {
+    background-color: #fafa00
+}
+
+span.icon > .fa {
+    cursor: default
+}
+
+.admonitionblock td.icon [class^="fa icon-"] {
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+    cursor: default
+}
+
+.admonitionblock td.icon .icon-note:before {
+    content: "\f05a";
+    color: #19407c
+}
+
+.admonitionblock td.icon .icon-tip:before {
+    content: "\f0eb";
+    text-shadow: 1px 1px 2px rgba(155, 155, 0, .8);
+    color: #111
+}
+
+.admonitionblock td.icon .icon-warning:before {
+    content: "\f071";
+    color: #bf6900
+}
+
+.admonitionblock td.icon .icon-caution:before {
+    content: "\f06d";
+    color: #bf3400
+}
+
+.admonitionblock td.icon .icon-important:before {
+    content: "\f06a";
+    color: #bf0000
+}
+
+.conum[data-value] {
+    display: inline-block;
+    color: #fff !important;
+    background-color: rgba(0, 0, 0, .8);
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    text-align: center;
+    font-size: .75em;
+    width: 1.67em;
+    height: 1.67em;
+    line-height: 1.67em;
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold
+}
+
+.conum[data-value] * {
+    color: #fff !important
+}
+
+.conum[data-value] + b {
+    display: none
+}
+
+.conum[data-value]:after {
+    content: attr(data-value)
+}
+
+pre .conum[data-value] {
+    position: relative;
+    top: -.125em
+}
+
+b.conum * {
+    color: inherit !important
+}
+
+.conum:not([data-value]):empty {
+    display: none
+}
+
+dt, th.tableblock, td.content, div.footnote {
+    text-rendering: optimizeLegibility
+}
+
+h1, h2, p, td.content, span.alt {
+    letter-spacing: -.01em
+}
+
+p strong, td.content strong, div.footnote strong {
+    letter-spacing: -.005em
+}
+
+p, blockquote, dt, td.content, span.alt {
+    font-size: 1.0625rem
+}
+
+p {
+    margin-bottom: 1.25rem
+}
+
+.sidebarblock p, .sidebarblock dt, .sidebarblock td.content, p.tableblock {
+    font-size: 1em
+}
+
+.exampleblock > .content {
+    background-color: #fffef7;
+    border-color: #e0e0dc;
+    -webkit-box-shadow: 0 1px 4px #e0e0dc;
+    box-shadow: 0 1px 4px #e0e0dc
+}
+
+.print-only {
+    display: none !important
+}
+
+@media print {
+    @page {
+        margin: 1.25cm .75cm
+    }
+
+    * {
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important
+    }
+
+    a {
+        color: inherit !important;
+        text-decoration: underline !important
+    }
+
+    a.bare, a[href^="#"], a[href^="mailto:"] {
+        text-decoration: none !important
+    }
+
+    a[href^="http:"]:not(.bare):after, a[href^="https:"]:not(.bare):after {
+        content: "(" attr(href) ")";
+        display: inline-block;
+        font-size: .875em;
+        padding-left: .25em
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")"
+    }
+
+    pre, blockquote, tr, img, object, svg {
+        page-break-inside: avoid
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    svg {
+        max-width: 100%
+    }
+
+    p, blockquote, dt, td.content {
+        font-size: 1em;
+        orphans: 3;
+        widows: 3
+    }
+
+    h2, h3, #toctitle, .sidebarblock > .content > .title {
+        page-break-after: avoid
+    }
+
+    #toc, .sidebarblock, .exampleblock > .content {
+        background: none !important
+    }
+
+    #toc {
+        border-bottom: 1px solid #ddddd8 !important;
+        padding-bottom: 0 !important
+    }
+
+    .sect1 {
+        padding-bottom: 0 !important
+    }
+
+    .sect1 + .sect1 {
+        border: 0 !important
+    }
+
+    #header > h1:first-child {
+        margin-top: 1.25rem
+    }
+
+    body.book #header {
+        text-align: center
+    }
+
+    body.book #header > h1:first-child {
+        border: 0 !important;
+        margin: 2.5em 0 1em 0
+    }
+
+    body.book #header .details {
+        border: 0 !important;
+        display: block;
+        padding: 0 !important
+    }
+
+    body.book #header .details span:first-child {
+        margin-left: 0 !important
+    }
+
+    body.book #header .details br {
+        display: block
+    }
+
+    body.book #header .details br + span:before {
+        content: none !important
+    }
+
+    body.book #toc {
+        border: 0 !important;
+        text-align: left !important;
+        padding: 0 !important;
+        margin: 0 !important
+    }
+
+    body.book #toc, body.book #preamble, body.book h1.sect0, body.book .sect1 > h2 {
+        page-break-before: always
+    }
+
+    .listingblock code[data-lang]:before {
+        display: block
+    }
+
+    #footer {
+        background: none !important;
+        padding: 0 .9375em
+    }
+
+    #footer-text {
+        color: rgba(0, 0, 0, .6) !important;
+        font-size: .9em
+    }
+
+    .hide-on-print {
+        display: none !important
+    }
+
+    .print-only {
+        display: block !important
+    }
+
+    .hide-for-print {
+        display: none !important
+    }
+
+    .show-for-print {
+        display: inherit !important
+    }
+}
+
+</style>
+<link rel="stylesheet" href="./FreeFinance REST API_files/font-awesome.min.css">
+<link rel="stylesheet" href="./FreeFinance REST API_files/github.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>FreeFinance REST API</h1>
+<div class="details">
+<span id="author" class="author">support@freefinance.at</span><br>
+<span id="revdate">2.0.0-beta2</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="https://freefinance-dev.github.io/#_introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="https://freefinance-dev.github.io/#_basics">1.1. Basics</a></li>
+<li><a href="https://freefinance-dev.github.io/#_domains">1.2. Domains</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_authentication">2. Authentication</a>
+<ul class="sectlevel2">
+<li><a href="https://freefinance-dev.github.io/#auth_tu">2.1. OIDC Client Credentials with Technical User</a></li>
+<li><a href="https://freefinance-dev.github.io/#_oidc_authorization_code_flow">2.2. OIDC Authorization Code Flow</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_basic_api_features">3. Basic API features</a>
+<ul class="sectlevel2">
+<li><a href="https://freefinance-dev.github.io/#_organization">3.1. Organization</a></li>
+<li><a href="https://freefinance-dev.github.io/#_base_path_and_clients">3.2. Base Path and Clients</a></li>
+<li><a href="https://freefinance-dev.github.io/#_content_types">3.3. Content types</a></li>
+<li><a href="https://freefinance-dev.github.io/#_result_formats">3.4. Result formats</a></li>
+<li><a href="https://freefinance-dev.github.io/#_sorting">3.5. Sorting</a></li>
+<li><a href="https://freefinance-dev.github.io/#_request_and_response_references">3.6. Request and response references</a></li>
+<li><a href="https://freefinance-dev.github.io/#_query_parameter_arrays">3.7. Query parameter arrays</a></li>
+<li><a href="https://freefinance-dev.github.io/#_error_responses">3.8. Error responses</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_examples">4. Examples</a>
+<ul class="sectlevel2">
+<li><a href="https://freefinance-dev.github.io/#_clients">4.1. Clients</a></li>
+<li><a href="https://freefinance-dev.github.io/#cbs_examples">4.2. Bookkeeping basics</a>
+<ul class="sectlevel3">
+<li><a href="https://freefinance-dev.github.io/#_accounts">4.2.1. Accounts</a></li>
+<li><a href="https://freefinance-dev.github.io/#_tax_class_entries">4.2.2. Tax class entries</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_incoming_and_outgoing_invoices">4.3. Incoming and outgoing invoices</a>
+<ul class="sectlevel3">
+<li><a href="https://freefinance-dev.github.io/#_incoming_invoices">4.3.1. Incoming Invoices</a>
+<ul class="sectlevel4">
+<li><a href="https://freefinance-dev.github.io/#_double_entry_accounting">Double Entry Accounting</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_outgoing_invoices">4.3.2. Outgoing Invoices</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#itm_examples">4.4. Items</a>
+<ul class="sectlevel3">
+<li><a href="https://freefinance-dev.github.io/#_creating_an_item">4.4.1. Creating an item</a></li>
+<li><a href="https://freefinance-dev.github.io/#_fetching_items">4.4.2. Fetching items</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_invoicing">4.5. Invoicing</a>
+<ul class="sectlevel3">
+<li><a href="https://freefinance-dev.github.io/#_prerequisites">4.5.1. Prerequisites</a></li>
+<li><a href="https://freefinance-dev.github.io/#_staging_invoices">4.5.2. Staging invoices</a></li>
+<li><a href="https://freefinance-dev.github.io/#_finalized_invoices">4.5.3. Finalized invoices</a></li>
+<li><a href="https://freefinance-dev.github.io/#inv_line_calc">4.5.4. Verification of total sums</a></li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_pdf_and_image_upload">4.6. PDF and image upload</a>
+<ul class="sectlevel3">
+<li><a href="https://freefinance-dev.github.io/#_upload_a_document_to_the_staging_folder">4.6.1. Upload a document to the staging folder</a></li>
+<li><a href="https://freefinance-dev.github.io/#_upload_a_document_with_metadata">4.6.2. Upload a document with metadata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://freefinance-dev.github.io/#_faq">5. FAQ</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The REST API to be used with FreeFinance and FinanzFenster.
+Please read the examples for an introduction to authentication and some use cases.</p>
+</div>
+<div id="openapi_spec" class="paragraph">
+<p>Given the large number of available endpoints, they are not listed in this documentation.
+Instead, the OpenAPI specification file (version 3.1) is available as <a href="https://freefinance-dev.github.io/openapi.yaml">YAML</a> or <a href="https://freefinance-dev.github.io/openapi.json">JSON</a>.</p>
+</div>
+<div class="paragraph">
+<p>The format of your choice can be imported into most API clients or the <a href="https://editor-next.swagger.io/">Swagger Editor Beta</a>.
+You can also use it to generate the request and response models for a programming language of your choice.</p>
+</div>
+<div class="sect2">
+<h3 id="_basics">1.1. Basics</h3>
+<div class="paragraph">
+<p>While a user authorizes itself against the API, it is not the organizational entity that holds all the data.
+A bookkeeping instance (such as a company, rent and leasing, or a freelancer) is represented as a <strong>client</strong>.
+A single user has access to one or several clients, and one client can be accessed by one or several users.
+Each user has one or more assigned roles for a client, which define the permissions the user has for that client.
+The initially created user might have all permissions available, while a special employee user might only be able to access specific modules.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Most example responses given in this documentation are shortened for brevity, i.e. they don’t contain all properties that are returned.
+Refer to the OpenAPI spec files linked above for the complete schema of responses.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_domains">1.2. Domains</h3>
+<div class="paragraph">
+<p>For testing purposes, we offer two environments to develop against which are separated from production environments:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Demo</strong> (<a href="https://demo.freefinance.at/" class="bare">https://demo.freefinance.at</a>) is a production-like environment that is actively used for demonstrations, trials of the application, and education purposes.
+It is equal or very close to the production release of the application, is completely separated from production users, and data is persisted on a best-effort basis.</p>
+</li>
+<li>
+<p><strong>QA</strong> (<a href="https://app.qa.freefinance.at/" class="bare">https://app.qa.freefinance.at/</a>) is a testing environment that is used to test an upcoming application version still in development and testing.
+It may be unstable, contain errors, and no guarantees are made regarding data persistence; it can be reset at any time.
+Using the QA is recommended when you need to prepare for still-unreleased APIs or test your integrations against upcoming releases.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once your application integration is ready for production, you can set the URL to the production environment, which depends on the specific portal of your user.
+Different portals exist for different partnerships, but for convenience every <em>region</em> (Austria, Germany, International, and so on, distinguished by a different top-level domain) has a single API URL.
+For example, the production URL <a href="https://app.freefinance.at/" class="bare">https://app.freefinance.at</a> in the Austrian region has many Austrian sub-portals, but the URL <a href="https://api.freefinance.at/" class="bare">https://api.freefinance.at</a> is available for users in all portals in the Austrian region.
+This allows application developers to use the API regardless of the specific portal of the user.<br>
+The same is true for <a href="https://app.freefinance.de/" class="bare">https://app.freefinance.de</a> and <a href="https://api.freefinance.de/" class="bare">https://api.freefinance.de</a>, and so on.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you access only your own user and client, you can use the URL you are already familiar with, like <a href="http://app.freefinance.at/" class="bare">http://app.freefinance.at</a>, where the API is also accessible.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authentication">2. Authentication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The v2 API expects Bearer authentication as header parameter in every authenticated request.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request that includes the Bearer token</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://api.freefinance.at/api/2.0/clients
+Authorization: Bearer MY-TOKEN</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Within the v2 API, "authenticated request" encompasses all resources that require a valid user authenticated by the IDP.
+A number of unauthenticated resources exist to provide general information about the portal, such as the authentication info resource that returns the IDP of the application.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example unauthenticated request</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://api.freefinance.at/api/2.0/auth/issuer</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example unauthenticated response</div>
+<div class="content">
+<pre>HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://accounts.freefinance.at/auth/realms/demo"</span>,
+  <span class="hljs-attr">"realm"</span>: <span class="hljs-string">"demo"</span>
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+While unauthenticated resources don’t require the Bearer token to be provided, they still validate the token if one is sent - if the token is invalid or expired, the request will be denied.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Valid tokens can be requested by the IDP URL returned in the <code>/auth/issuer</code> response.
+The IDP expects authentication using the OpenID Connect (OIDC) standard.</p>
+</div>
+<div class="paragraph">
+<p>Two different methods exist to authenticate.
+Which one you choose depends on your use case and the type of your application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the following documentation, we distinguish between the terms <em>client</em> (referencing a bookkeeping client your user has access to) and <em>API client</em> (an instance of an API caller, like your webshop, authenticating itself).
+OpenID Connect has no concept of bookkeeping clients, so any third-party documentation related to OpenID Connect you might look up uses the term <em>client</em> for what is defined as <em>API client</em> here.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="auth_tu">2.1. OIDC Client Credentials with Technical User</h3>
+<div class="paragraph">
+<p>A user with the permission to connect external accounts to a client can create a <em>technical user</em> for that client.
+This is a separate, special user with its own fixed role tied to the client, and comes with a set of API client credentials to authenticate directly.</p>
+</div>
+<div class="paragraph">
+<p>This approach is recommended in the following cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Your application only needs to connect to a few clients at most.
+Examples include your own web shop or a script running on a trusted computer accessing your client.</p>
+</li>
+<li>
+<p>You don’t need to tie this API access to your (or any) user.</p>
+</li>
+<li>
+<p>For accessing multiple clients, it is acceptable to store a separate set of API credentials for each.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This approach is <strong>not</strong> recommended in these cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You wish to provide a general service offered to users of FreeFinance, with your application being granted access by the user without having to copy credentials.</p>
+</li>
+<li>
+<p>Your application can handle URL redirects and can use the OIDC standard Authorization Code flow.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A technical user can be created in the web UI:<br>
+Navigate to <em>My profile</em> → <em>User &amp; Permission</em> → <em>Connected devices</em> and choose the "Create technical user" option in the sidebar.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The technical user has no password and can’t be used to log in to the application over the UI.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>You will be given an API client id and API client secret.
+<strong>Store them responsibly like you would a password</strong> - they grant access to your client with all the permissions given to the "API user" role.
+If possible, restrict the permissions of that user to the minimum required for your use case.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Dont' confuse the <em>API client_id</em>, which belongs to the technical user and is part of the id/secret pair for authentication, with the <em>client ID</em>, which is the numerical number of your bookkeeping client.
+Refer to the <a href="https://freefinance-dev.github.io/#_clients">Clients</a> section for further clarification.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>To change the permissions of the API user, you can use the UI and navigate to <em>My Profile</em> → <em>User &amp; Permission</em> → <em>Permissions</em> and select the Technical User role.
+Revoke all permissions not needed for your use case.</p>
+</div>
+<div class="paragraph">
+<p>You can now obtain a valid token from the IDP, which is a different URL than the API URL.
+You can request the IDP URL from the API by calling <code>/auth/issuer</code>, and then appending the OIDC path (<code>/protocol/openid-connect/token</code>) to the returned URL for the full path.</p>
+</div>
+<div class="paragraph">
+<p>The payload is in URl-encoded form with parameters as key-value pairs separated by "&amp;".
+Supply your API client ID (<code>client_id</code>) and secret (<code>client_secret</code>) this way, and the <code>grant_type</code> set to the fixed value <code>client_credentials</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example token request with technical user credentials</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">POST https://accounts.freefinance.at/auth/realms/demo/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>grant_type=client_credentials &amp;
+client_id=technical_api_user_XXXXX_XXXXXXXXXX &amp;
+client_secret=abc...xyz</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example token response with technical user credentials</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"access_token"</span>: <span class="hljs-string">"eyJhbGciO..."</span>,
+  <span class="hljs-attr">"expires_in"</span>: <span class="hljs-number">300</span>,
+  <span class="hljs-attr">"refresh_expires_in"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"token_type"</span>: <span class="hljs-string">"Bearer"</span>,
+  <span class="hljs-attr">"not-before-policy"</span>: <span class="hljs-number">123456789</span>,
+  <span class="hljs-attr">"scope"</span>: <span class="hljs-string">"profile email"</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the access token expires (see the <code>expires_in</code> value in seconds, typically 5 minutes), you can simply issue a new token with the same credentials.
+A refresh token is not necessary and <strong>not provided</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Using this token, you can now issue API calls as the technical user and are bound by the permissions of its "API user" role.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The API client credentials don’t expire, but they can be invalidated in the UI by deleting the technical user.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_oidc_authorization_code_flow">2.2. OIDC Authorization Code Flow</h3>
+<div class="paragraph">
+<p>By redirecting to our IDP with an authorization request, a user can safely log in on the trusted IDP and authorize your application to access the API.
+The returned <em>authorization code</em> can then be exchanged for an <em>access token</em> and <em>refresh token</em>.</p>
+</div>
+<div class="paragraph">
+<p>This approach is recommended in the following cases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Your application can handle URL redirects, i.e. there is a reachable URL for the app that can be redirected to.
+This can either be a <code>https</code> URL or a custom scheme registered to an Android or iOS app.</p>
+</li>
+<li>
+<p>The application wants to access the API as the user that is granting access with all permissions granted to that user.
+(Note that API scopes will be added to further restrict access in the future.)</p>
+</li>
+<li>
+<p>The application is offered as a general service for all users of FreeFinance.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The approach is <strong>not</strong> recommended if only a single client needs to be accessed.
+Creating a technical user is more straightforward and doesn’t require URL redirects.</p>
+</div>
+<div class="paragraph">
+<p>Your application must be able to either store a secret safely server-side (for web applications with a back-end issuing the API calls) or implement the PKCE method to ensure that the authorization code is not intercepted.
+The API client must be created first, so contact us and provide the following information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The name of your application</p>
+</li>
+<li>
+<p>The use case and APIs you wish to access</p>
+</li>
+<li>
+<p>A list of valid redirect URLs that are allowed to be used</p>
+</li>
+<li>
+<p>Whether your application can store a server-side secret (and is issued a client secret) or implements PKCE instead</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once the API client is created and ready, you can begin the authorization process by redirecting the user of your application to the IDP, as returned by the <code>/auth/issuer</code> resource, and the OIDC path (<code>/protocol/openid-connect/auth</code>).
+You provide the following information as query parameters to that redirect:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The API client ID you were issued</p>
+</li>
+<li>
+<p>One of the redirect URLs you registered (URL encoded)</p>
+</li>
+<li>
+<p>The OIDC token scope. <code>openid</code> provides you with an ID token and a short-running refresh token, <code>offline_access</code> with a long-running token.</p>
+</li>
+<li>
+<p>A freely chosen string of your choice in the <code>state</code> parameter, which will be returned when the authorization is successful.
+You can use this string to pass identifiers or references to link the authorization back to your internal user.</p>
+</li>
+<li>
+<p>If no client secret was issued and PKCE is used, the <code>code_challenge</code> for PKCE using <code>S256</code> for <code>code_challenge_method</code>.
+Since many OIDC compatible libraries handle this for you, it will not be explained in detail - further information can be found <a href="https://datatracker.ietf.org/doc/html/rfc7636">in the corresponding RFC</a>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The scope you request for the token determines the duration of the tokens, but has no bearing on the permissions the user has for specific clients.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="title">Example request initiating the authorization code flow with PKCE</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://accounts.freefinance.at/auth/realms/demo/protocol/openid-connect/auth?response_type=code&amp;client_id=MY-APP-CLIENT&amp;redirect_uri=https%3A%2F%2Fmy.app%2Fmy-redirect&amp;scope=offline_access&amp;code_challenge=MY-CHALLENGE-CODE&amp;code_challenge_method=S256</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The browser will be redirected to log in with the IDP and give consent to grant your application access.
+If consent is granted, the browser is redirected back to the redirect URL you provider with two query parameters: <code>code</code> and <code>state</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can then exchange the code for tokens with a POST request.
+The <code>grant_type</code> is set to the fixed value <code>authorization_code</code>, and the <strong>exact</strong> redirect URL used in the original redirect request must be provided.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request exchanging the authorization code for tokens with PKCE</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">POST https://accounts.freefinance.at/auth/realms/demo/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>client_id = MY-APP-CLIENT-ID &amp;
+grant_type = authorization_code &amp;
+code = THE-RETURNED-AUTHORIZATION-CODE &amp;
+redirect_uri = https%3A%2F%2Fmy.app%2Fmy-redirect &amp;
+code_verifier = MY-CODE-CHALLENGE-VERIFIER</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have been issued an API client secret, pass it as <code>client_secret</code> instead of the <code>code_verifier</code>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The API client secret must be stored securely server-side and never be made accessible to anyone, transmitted to your user, or hard-coded in the frontend of your application.
+Only your backend should make the token request!
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>If the code and either the secret or the PKCE challenge is verified, you are returned an <code>access_token</code> and <code>request_token</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example response returning tokens from an authorization code</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+<span class="hljs-attr">"access_token"</span>: <span class="hljs-string">"eyJhbGciO..."</span>,
+<span class="hljs-attr">"expires_in"</span>: <span class="hljs-number">300</span>,
+<span class="hljs-attr">"refresh_expires_in"</span>: <span class="hljs-number">0</span>,
+<span class="hljs-attr">"refresh_token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzUxMiIs..."</span>,
+<span class="hljs-attr">"token_type"</span>: <span class="hljs-string">"Bearer"</span>,
+<span class="hljs-attr">"not-before-policy"</span>: <span class="hljs-number">123456789</span>,
+<span class="hljs-attr">"session_state"</span>: <span class="hljs-string">"..."</span>,
+<span class="hljs-attr">"scope"</span>: <span class="hljs-string">"profile offline_access email"</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Observe the <code>expires_in</code> value (in seconds) for the <code>access_token</code> and the <code>refresh_token_expires_in</code> value for the <code>refresh_token</code>.
+If you requested the <code>offline_access</code> scope, your refresh token will be valid for a long time (30 days).</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>access_token</code> for the Bearer authorization in your API calls, and request a new token after it expires with your <code>refresh_token</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request requesting a new access token with a refresh token</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">POST https://accounts.freefinance.at/auth/realms/demo/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>client_id = MY-APP-CLIENT-ID &amp;
+grant_type = refresh_token &amp;
+refresh_token = MY-REFRESH-TOKEN &amp;
+scope = offline_access</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As before, if you have been issued an API client secret, pass it as an additional <code>client_secret</code> parameter.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The <code>refresh_token</code> can be used to continuously obtain new access tokens for the user that granted your application access.
+Keep it as confidential as you would a password and store it securely either in your backend or the available secret storage providers of the web browser or mobile operating systems like Android and iOS!
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_api_features">3. Basic API features</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_organization">3.1. Organization</h3>
+<div class="paragraph">
+<p>The API is divided into sections that correspond to feature groups or modules in Freefinance.
+Each module has a short, three-letter abbreviation and its corresponding tag in the OpenAPI definition file.
+The descriptions of the tags describe the module, and some modules are further divided by subtags for readability (such as <code>CBI-INC</code> and <code>CBI-OUT</code> for cash based invoicing, divided into incoming and outgoing invoices).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_base_path_and_clients">3.2. Base Path and Clients</h3>
+<div class="paragraph">
+<p>The base API endpoint path is <code>/api/2.0/</code>, usually followed by the three-letter module abbreviation and the resource.<br>
+<code>GET &lt;host&gt;/api/2.0/fnd/countries</code> for example would return all countries available in the API.
+FND refers to the <strong>f</strong>ou<strong>nd</strong>ation module, which represents basic countries, regions, currencies, and units of measure that can be used in the API.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In all following examples for API endpoints, <code>/api/2.0/</code> is omitted for brevity, but still required in the actual API call.
+If a path is given, such as <code>/fnd/countries</code>, the full path would be <code>/api/2.0/fnd/countries</code>.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>To obtain all available clients, the <code>/clients</code> endpoint is available.
+It lists the numerical ID for a client, which is part of the resource path for all resources pertaining to that client.
+For example, the GET call would return a client with ID 10000, and to list all customers of that client, the path would look like this:<br>
+<code>GET /clients/10000/mas/customers</code><br>
+Note that the module prefix is still part of the path after the client ID - the vast majority of resources are sub-paths of a client.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_content_types">3.3. Content types</h3>
+<div class="paragraph">
+<p>The API uses JSON as primary exchange format.<br>
+Property keys use snake case, such as <code>unit_of_measure</code>, for readability.</p>
+</div>
+<div class="paragraph">
+<p>Resources that return files, like <code>/pdf</code>, exporters, and image endpoints return the proper file type.
+For uploads with sidecar json metadata, the API supports multipart requests (recommended) or having the attachment encoded as base64 inside a json property.</p>
+</div>
+<div class="paragraph">
+<p>Date values are expected and returned in ISO format, such as <code>"invoice_date": "2024-03-18"</code> or <code>"date_time": "2025-07-29T17:18:40.2161948"</code>.
+IDs for resources and references are UUIDs, with a few exceptions, such as client IDs (integers).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_result_formats">3.4. Result formats</h3>
+<div class="paragraph">
+<p>Most endpoints that return lists are sliced, which means that only a partial response is returned if the total result count exceeds the limit for a single response.
+They have the following format:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example sliced response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">4</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-number">21333</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Example company"</span>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>total_count</code> exceeds the number of objects in the array, the next page can be returned by including the <code>offset</code> query parameter.
+For our previous example of fetching the customers of a client, the call would look like this:<br>
+<code>GET /clients/10000/mas/customers?offset=100</code>.</p>
+</div>
+<div class="paragraph">
+<p>Most resources have a default result size of 100. By passing the <code>limit</code> parameter, that size can be adjusted to a maximum of 500. For example, customers no. 100-300 can be fetched with this URL:<br>
+<code>GET /clients/10000/mas/customers?limit=200&amp;offset=100</code>.</p>
+</div>
+<div class="paragraph">
+<p>If a resource has different limits, it will be noted in its documentation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sorting">3.5. Sorting</h3>
+<div class="paragraph">
+<p>Depending on the resource, results can be sorted in the backend by passing the <code>sort</code> query parameter.
+Multiple sort parameters can be defined for nested sorting with a comma delimiter, and the sort order can be defined per property with the <code>:ASC</code> and <code>:DESC</code> suffixes.
+If no suffix is provided, the property is sorted in ascending order.</p>
+</div>
+<div class="paragraph">
+<p>There is no standardized way to document sort parameters in the OpenAPI spec, you’ll have to refer to the documentation of a specific endpoint.
+In general, the major properties such as dates, totals, names etc. are sortable by passing the response property name, such as <code>total</code>.
+If a sort field is not recognized, it will be ignored.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example for sorting over multiple properties when querying the suppliers of a client:<br>
+<code>GET /clients/10000/mas/suppliers?sort=display_name:ASC,supplier_number:DESC,zip_code</code></p>
+</div>
+<div class="paragraph">
+<p>There is no support in the OpenAPI specification for indicating which properties of a particular resource can be sorted by, so no documented lists can be provided in a standardized way.
+Usually, the most important properties of the object can be used as sort parameter, and resources may have a default sort order if none is provided as parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_request_and_response_references">3.6. Request and response references</h3>
+<div class="paragraph">
+<p>Many of the entities exposed in the API have references to other entities.
+For example, a customer of a client belongs to a country and region, which are given as reference.</p>
+</div>
+<div class="paragraph">
+<p>The vast majority of entities use a UUID as identifier given in the <code>id</code> property, and are referenced with that UUID.</p>
+</div>
+<div class="paragraph">
+<p>For responses, that reference is a nested object that contains not only the id itself, but also the most important data related to that reference.
+This is done to ease the readability of responses and include enough data that the reference can be shown in a meaningful way.
+There is no need for chains of API GET calls to get the basic information of a referenced entity.</p>
+</div>
+<div class="paragraph">
+<p>As an example, a customer of a client can reference a <code>contra_account</code>, which is the default receivables contra account used in double-entry accounting invoices.
+The response format with the reference looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example customer response (shortened)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"759...45"</span>,
+      <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"John"</span>,
+      <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Doe"</span>,
+      <span class="hljs-attr">"contra_account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4232...96"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Kundenkonto"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"20100"</span>,
+        <span class="hljs-attr">"user_description"</span>: <span class="hljs-string">"Receivables (John Doe)"</span>,
+        <span class="hljs-attr">"category"</span>: <span class="hljs-string">"DEBIT"</span>
+      }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When creating or modifying an existing customer, the <code>contra_account</code> is referenced only by the ID of a valid account.
+The entire nested account object is not required and not part of the request schema.
+You don’t need to pass <em>null</em> for optional properties, it is equivalent to simply omitting it from the request.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example customer payload (shortened)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+      <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"John"</span>,
+      <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Doe"</span>,
+      <span class="hljs-attr">"contra_account"</span>:  <span class="hljs-string">"4232...96"</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_query_parameter_arrays">3.7. Query parameter arrays</h3>
+<div class="paragraph">
+<p>In case a query parameter accepts multiple values at once, the values can be given as comma-separated list, or by adding the query parameter multiple times.
+For example, the endpoint<br>
+<code>GET /clients/10000/pos/cash_registers</code><br>
+accepts an optional query parameter <code>states</code> to find cash registers that have any of the given states.
+To retrieve all cash registers that are either active or locked, the parameter can be set in the following ways:<br>
+<code>GET /clients/10000/pos/cash_registers?states=ACTIVE,LOCKED</code><br>
+or<br>
+<code>GET /clients/10000/pos/cash_registers?states=ACTIVE&amp;states=LOCKED</code></p>
+</div>
+<div class="paragraph">
+<p>This OR-logic is the default for querying over multiple possible values.
+If the resource uses AND-logic for that particular property, it will be stated in the description of the parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_error_responses">3.8. Error responses</h3>
+<div class="paragraph">
+<p>If a request fails for validation or business logic related reasons, the error response has this format:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example error response</div>
+<div class="content">
+<pre>HTTP/2 400 Bad Request
+content-type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"error"</span>: <span class="hljs-string">"cbs-account-not-found"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Invalid account 01fa...42 or account not usable for desired action!"</span>,
+  <span class="hljs-attr">"identifier"</span>: <span class="hljs-string">"sA5qOX"</span>,
+  <span class="hljs-attr">"details"</span>: [],
+  <span class="hljs-attr">"payload"</span>: [
+    <span class="hljs-string">"01f1a...42"</span>
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>error</code> is a unique code per error type, usually prefixed with the module relevant for that error.</p>
+</li>
+<li>
+<p><code>message</code> gives a pre-translated error message that can be forwarded to the user or for debugging purposes.</p>
+</li>
+<li>
+<p><code>identifier</code> is a short random code to correlate this error to output in our logs - if you contact support, you can include it to provide additional context.</p>
+</li>
+<li>
+<p>Lastly, <code>payload</code> includes relevant identifiers for parsing the error in combination with the error code for convenience.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you receive validation errors for missing properties that are required, the error response refers to the field with camel case due to a technical limitation.
+The property in the schema is still using snake case.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The application also uses these error codes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Error code</th>
+<th class="tableblock halign-left valign-top">Causes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400 Bad Request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Validation errors, failed prerequisites, business logic errors, a reference inside the payload can’t be found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401 Unauthenticated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No authentication → acquire a new token from the IDP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403 Forbidden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invalid client, no access to the client, no access to the resource (missing feature or permissions)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404 Not Found</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API endpoint not found, ID referenced in a path parameter was not found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409 Conflict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A supplied unique identifier is already taken</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">4. Examples</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_clients">4.1. Clients</h3>
+<div class="paragraph">
+<p>As explained in the introduction, the client is the organizational entity that holds a bookkeeping instance.
+It is included in most API calls as a path parameter, so the first step of using the API is to query your available clients and select one for subsequent API requests.</p>
+</div>
+<div class="paragraph">
+<p>Once you have successfully authenticated (see the <a href="https://freefinance-dev.github.io/#_authentication">Authentication</a> section), you can call the <code>GET clients</code> API:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example clients API request</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://demo.freefinance.at/api/2.0/clients
+Authorization: Bearer eyJ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example clients API response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json;charset=UTF-8
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-number">21334</span>,
+      <span class="hljs-attr">"display_name"</span>: <span class="hljs-string">"Max Muster"</span>,
+      <span class="hljs-attr">"product_type"</span>: <span class="hljs-string">"CMA"</span>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Most users will have only one client available.
+If you only ever need to access one specific client, you can store the ID permanently, as it does not change, and don’t need to query your available clients.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+If you are using the <a href="https://freefinance-dev.github.io/#auth_tu">Technical User</a> authentication with client credentials, the API client id and API client secret pair are used just for authentication.
+The API client ID (called <code>client_id</code> in the OIDC spec) contains the numerical ID of your bookkeeping client and a random number, and can’t be used as path parameter for the v2 API.
+For example, your API client id can be <code>21334_21715633</code>, but your client ID is just <code>21334</code>.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>With the numerical ID of the client you can now make API calls within the context of that client by prepending <code>clients/{id}</code> to the actual resource.
+Here is an example to query the bookkeeping accounts of your client with the <code>cbs/accounts</code> API:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example accounts API request</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://demo.freefinance.at/api/2.0/clients/21334/cbs/accounts?limit=1
+Authorization: Bearer eyJ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example accounts API response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json;charset=UTF-8
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">340</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"8b7f...b3"</span>,
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"0100"</span>,
+      <span class="hljs-attr">"account_type"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"5fee...df"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"L"</span>
+      },
+      <span class="hljs-attr">"category"</span>: <span class="hljs-string">"DEBIT"</span>,
+      <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"default_tax_class_entry"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4db0...0e"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+            <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+          },
+          <span class="hljs-attr">"tax_class"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"c2b0...18"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ASTD"</span>
+          },
+          <span class="hljs-attr">"forced_tax_class_entry"</span>: <span class="hljs-literal">false</span>
+        }
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This example demonstrates the v2 API features outlined in the previous chapter:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The numerical client ID is a fixed path parameter for all API calls.
+If the client is invalid, or you don’t have access, you’ll receive a 403 response regardless of the resource you call.</p>
+</li>
+<li>
+<p>The response is sliced, i.e. you only receive a part of all available data.
+The <code>total_count</code> shows you how many total results are available in the query, but the array only includes a slice.
+You can use the <code>limit</code> and <code>offset</code> parameters to iterate through the slices.</p>
+</li>
+<li>
+<p>Nested objects with an <code>id</code> reference other resources.
+For example, the tax_class can be accessed with the <code>fis/tax_classes</code> resource.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cbs_examples">4.2. Bookkeeping basics</h3>
+<div class="paragraph">
+<p>The main use case of the API is to create invoices and bookings of some kind - like creating a new invoice for a customer.
+As these invoices are then included in the bookkeeping, the lines they contain must include an <em>account</em> and one or several <em>tax class entries</em>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The number of possible tax class entries (and resulting tax rates) depends on the country of the client.
+European countries only have one tax to pay for a line (the value added tax, or VAT), while non-european countries might have several for the state, county, etc.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The combination of these two is required for every invoice line and receipt line you create.
+They can either be supplied directly, or defaulted by storing them in an <em>item</em>, and referencing that item in a line with defaulting enabled.<br>
+Either way, you have to give a valid combination of <em>account</em> and <em>tax class entry</em> at least once - either with the API here, or by setting them up in the UI for your <em>items</em> beforehand.</p>
+</div>
+<div class="paragraph">
+<p>If you wish to supply them with the API, please continue with the examples in this chapter.</p>
+</div>
+<div class="sect3">
+<h4 id="_accounts">4.2.1. Accounts</h4>
+<div class="paragraph">
+<p>An <strong>account</strong> is used in an invoice or booking line to reference the kind of income or expense that is later grouped and calculated for tax reports.
+Incomes usually have few different kinds (like basic incomes, discounts, cash credit etc.) whereas expenses have more distinguished categories (depreciating assets, office expenses, energy and so on).</p>
+</div>
+<div class="paragraph">
+<p>Every account has specific <em>uses</em>, which determine where in API resources it can be given as reference.
+Invoices you send to your customers have lines with accounts that have the <em>INV</em> use for example, while Point of Sale receipt lines have the <em>POS</em> use.
+Accounts can have multiple uses, they exist to help you fetch possible accounts for your use case.</p>
+</div>
+<div class="paragraph">
+<p>The previous chapter gave an example to fetch all available accounts for a client.
+If you wish to fetch all available accounts for creating invoices, you simply append the <code>use</code> query parameter.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example accounts API request with INV use</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://demo.freefinance.at/api/2.0/clients/21334/cbs/accounts?use=INV
+Authorization: Bearer eyJ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example accounts API response</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json;charset=UTF-8
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">44</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a678...5fd"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Revenue (income)"</span>,
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>,
+      <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"default_tax_class_entry"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+            <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+          },
+          <span class="hljs-attr">"forced_tax_class_entry"</span>: <span class="hljs-literal">false</span>
+        }
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the account has a <code>taxes</code> object, with <code>tax_1</code> through <code>tax_5</code> as possible properties.
+For European countries, only <code>tax_1</code> is relevant.
+The default tax class entry of an account is also listed, but not automatically defaulted in the API - the caller has to supply the tax class entry itself.</p>
+</div>
+<div class="paragraph">
+<p>If you require to fetch a specific account, you can either do so by the <code>id</code> directly (returning the account itself or a 404 error), or by using the <code>code</code> query parameter and supplying a code, which may still yield multiple results.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tax_class_entries">4.2.2. Tax class entries</h4>
+<div class="paragraph">
+<p>While the <em>account</em> represents what specific category an income or expense line belongs to, the <em>tax class entry</em> determines what specific taxes apply to the line.
+Every account has one <code>tax_class</code> per tax group (tax 1-5), with multiple accounts in a similar tax group sharing the same class for a group, and every such <em>tax class</em> has one or multiple <em>tax class entries</em>, which determine what specific tax has to be paid, most often distinguished by different <em>tax rates</em>.</p>
+</div>
+<div class="paragraph">
+<p>Here is an example to illustrate this:<br>
+The Austrian account <em>4000</em> is the standard income account for non-specific revenues.
+Since in Austria there is only one VAT, the <code>taxes</code> object only ever has a <code>tax_1</code> value.
+The <code>tax_class</code> has the code <code>ESTD</code>, which is the tax group for non-specific incomes - most income accounts have it.<br>
+The tax class now has several <em>entries</em>: they represent each possible <em>tax rate</em> that is due for a specific line.
+You can fetch all available rates with the <code>fis/tax_classes/{id}/entries</code> resource, passing the tax class id as parameter:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for tax class entries of a tax class</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">GET https://demo.freefinance.at/api/2.0/clients/21334/fis/tax_classes/e7db9b7b-c7e1-7940-eb1b-b0ab89bfdc0a/entries?limit=2sort=tax_rate%3Adesc
+Authorization: Bearer eyJ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example tax class entries response (abbreviated)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">HTTP/2 200 OK
+content-type: application/json;charset=UTF-8
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">6</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+      <span class="hljs-attr">"tax_rate"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"74a4...0b"</span>,
+        <span class="hljs-attr">"tax_rate"</span>: <span class="hljs-number">20</span>
+      }
+    },
+{
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"db92...90"</span>,
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"013"</span>,
+      <span class="hljs-attr">"tax_rate"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"22e4...fd"</span>,
+        <span class="hljs-attr">"tax_rate"</span>: <span class="hljs-number">13</span>
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the response we see the tax class entry <em>020</em>, whose ID matches the default tax class entry of the account <em>4000</em> in the previous example.
+It represents a tax rate of 20%, the standard rate for VAT in Austria.
+If your line item requires a different tax rate (for example, 10% for food), you simply supply the tax class entry with the matching rate for the invoice or receipt line.</p>
+</div>
+<div class="paragraph">
+<p>Tax rates are also a resource by themselves (given away by the fact that they have their own id), but for the purposes of creating invoices, items and receipts only the tax class entry is required.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Some special-purpose accounts have tax classes with only one tax class entry and are used for rebooks, corrections and so on.</p>
+</div>
+<div class="paragraph">
+<p>Others might have the <code>forced_tax_class_entry</code> flag set - the tax class may have multiple entries, but this specific account only allows the entry marked as default - trying to use any other entry will result in a validation error.</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_incoming_and_outgoing_invoices">4.3. Incoming and outgoing invoices</h3>
+<div class="paragraph">
+<p>This section introduces the creation of CBI invoices, one of the most used features of the API.
+Before you jump in, make sure you have read the <a href="https://freefinance-dev.github.io/#cbs_examples">bookkeeping essentials</a>.</p>
+</div>
+<div class="paragraph">
+<p>Incoming and outgoing invoices are the primary method of creating bookkeeping incomes and expenses.
+Two types exist: incoming invoices define expenses, and outgoing invoices define incomes.</p>
+</div>
+<div class="paragraph">
+<p>An invoice may have none, one or several bookings, and each booking in turn has a journal.
+Journals are realized incomes and outgos and created implicitly by the backend when required.</p>
+</div>
+<div class="paragraph">
+<p>Payment works differently depending on the type of your bookkeeping registered with the client - see the following sections for details.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Creating open, unpaid outgoing invoices is not enabled by default.
+This can be changed in the UI (<em>Fiscal Settings</em> → <em>Base Settings</em> → <em>Default values for incoming/outgoing invoices</em> → <em>Outstanding receivables/payables</em>)
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For cash method accounting (CMA), an unpaid invoice does not yet create a booking.
+The booking and its journal are created once the invoice receives the first payment, and partial payments create proportional journals from the invoice (small rounding errors can occur in the lines).
+Invoices can be deleted as long as no payment was made, otherwise the invoice can only be canceled.</p>
+</li>
+<li>
+<p>In double-entry accounting (DEA), every invoice automatically creates a booking and journal of the entire invoice against an unpaid contra account (payables and receivables).
+The invoice can then have one or several payments, which create simple rebooks from the unpaid account to the payment account.
+Invoices can only be canceled.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When querying invoices with the <code>GET /cbi/incoming_invoices</code> and <code>GET /cbi/outgoing_invoices</code> resources, only the header data of the invoice is returned.
+Full information including the lines is only provided when fetching a singular invoice by its ID, and bookings and journals are fetched with their own sub-resources.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect3">
+<h4 id="_incoming_invoices">4.3.1. Incoming Invoices</h4>
+<div class="paragraph">
+<p>Incoming invoices are the direct way to create expenses.
+The accounts used for incoming invoice lines are expense accounts, which you can retrieve in the account API with the <code>EXPENSE</code> use.</p>
+</div>
+<div class="paragraph">
+<p>For clients with both cash method accounting (CMA) and double entry accounting (DEA), this example creates an unpaid incoming invoice with the minimal set of required fields.</p>
+</div>
+<div class="paragraph">
+<p>In CMA, no booking is created, and the invoice does not have a sequence number yet.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for minimal incoming invoice</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/cbi/incoming_invoices
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-31"</span>,
+  <span class="hljs-attr">"lines"</span>: [
+    {
+      <span class="hljs-attr">"account"</span>: <span class="hljs-string">"9331...67"</span>, <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="hljs-attr">"taxes"</span>: { <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"4db0...0e"</span>
+          }
+        },
+      <span class="hljs-attr">"amount"</span>: <span class="hljs-number">120</span>,
+      <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span> <i class="conum" data-value="3"></i><b>(<span class="hljs-number">3</span>)</b>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>/cbs/accounts</code> API returns available accounts.
+Set the <code>use</code> query param to <code>EXPENSE</code> get all valid accounts for creating an incoming invoice.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Depending on the tax configuration of your country, one or several taxes can be defined.
+EU countries only require the VAT, so the <code>tax_1</code> group is set.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The amount type defines if the supplied amount is net before tax (NET) or total with tax (GROSS).</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If certain accounts are used (e.g. assets), the supplier becomes mandatory for the invoice.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="title">Example response for a CMA client</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"8af8...25"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-10-30"</span>,
+    <span class="hljs-attr">"currency"</span>: {
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"EUR"</span> <i class="conum" data-value="1"></i><b>(<span class="hljs-number">1</span>)</b>
+    },
+    <span class="hljs-attr">"net"</span>: <span class="hljs-number">120.00</span>,
+    <span class="hljs-attr">"tax"</span>: <span class="hljs-number">24.00</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">144.00</span>, <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="hljs-attr">"open"</span>: <span class="hljs-number">144.00</span>,
+    <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">144.00</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"lines"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"2174...f6"</span>,
+        <span class="hljs-attr">"line_number"</span>: <span class="hljs-number">1</span>, <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="hljs-attr">"amount"</span>: <span class="hljs-number">120</span>,
+        <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+        <span class="hljs-attr">"net"</span>: <span class="hljs-number">120.00</span>,
+        <span class="hljs-attr">"tax"</span>: <span class="hljs-number">24.00</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">144.00</span>, <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="hljs-attr">"account"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9331...67"</span>,
+          <span class="hljs-attr">"code"</span>: <span class="hljs-string">"7600"</span>
+        },
+        <span class="hljs-attr">"taxes"</span>: {
+          <span class="hljs-attr">"tax_1"</span>: {
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">24.00</span>,
+            <span class="hljs-attr">"tax_class_entry"</span>: {
+              <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4db04f15-e5b0-74f8-cd4b-b2b06e0c0f0e"</span>,
+              <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+              <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+            }
+          }
+        },
+        <span class="hljs-attr">"allowed_changes"</span>: [ <i class="conum" data-value="4"></i><b>(<span class="hljs-number">4</span>)</b>
+          <span class="hljs-string">"DELETION"</span>,
+          <span class="hljs-string">"ACCOUNT_INFO"</span>,
+          <span class="hljs-string">"AMOUNT"</span>,
+          <span class="hljs-string">"DESCRIPTION"</span>
+        ]
+      }
+    ],
+    <span class="hljs-attr">"allowed_changes"</span>: [ <i class="conum" data-value="4"></i><b>(<span class="hljs-number">4</span>)</b>
+      <span class="hljs-string">"DELETION"</span>,
+      <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-string">"SUPPLIER"</span>
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The currency, if not supplied, is set to the main currency of the client.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The totals of the invoice and lines are calculated in the backend.
+You can also supply the totals in the payload for validation, triggering an error on a mismatch.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The number of each line is assigned by the order of the lines in the payload <code>lines</code> array.
+Adding and removing lines of an existing invoice will overwrite the number of each existing line to match the order of the payload each time.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>allowed_changes</code> array lets you know what kind of changes are possible for this invoice and each line.
+Depending on the payment and booking state, inclusion of this invoice in tax reports etc. certain changes are prohibited in any later PUT requests or operations.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The next example creates a paid incoming invoice with a supplier from the <code>/mas/suppliers</code> resource.</p>
+</div>
+<div id="example_cbi_min" class="listingblock">
+<div class="title">Example request for a paid incoming invoice with supplier (CMA)</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/cbi/incoming_invoices
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"supplier"</span>: <span class="hljs-string">"09c8...e"</span>, <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"EUR"</span>,
+    <span class="hljs-attr">"note"</span>: <span class="hljs-string">"My internal note"</span>,
+    <span class="hljs-attr">"paid_date"</span>: <span class="hljs-string">"2025-12-10"</span>, <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="hljs-attr">"paid_contra_account"</span>: <span class="hljs-string">"8742...fb"</span>, <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A purchase for my company"</span>,
+    <span class="hljs-attr">"invoice_reference"</span>: <span class="hljs-string">"IV2025.0001"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"9331...67"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"4db0...0e"</span>
+                }
+            },
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">12</span>,
+            <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use the <code>/mas/suppliers</code> API to find available suppliers.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>When the date of payment is present, the invoice will be marked as paid in full, a booking will be created, and a sequence number assigned.
+For CMA paid invoices the invoice date is not required.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The paid contra account must always be supplied together with the paid date.
+See the <code>/cbs/accounts</code> API to find available accounts, using <code>MEANS_OF_PAYMENT</code> for the <code>use</code> parameter.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"6555...50"</span>,
+    <span class="hljs-attr">"invoice_sequence"</span>: <span class="hljs-string">"ER2025 1"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2026-01-01"</span>,
+    <span class="hljs-attr">"paid_date"</span>: <span class="hljs-string">"2025-12-10"</span>,
+    <span class="hljs-attr">"currency"</span>: {
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"EUR"</span>
+    },
+    <span class="hljs-attr">"net"</span>: <span class="hljs-number">12.00</span>,
+    <span class="hljs-attr">"tax"</span>: <span class="hljs-number">2.40</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">14.40</span>,
+    <span class="hljs-attr">"open"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"A purchase for my company"</span>,
+    <span class="hljs-attr">"invoice_reference"</span>: <span class="hljs-string">"IV2025.0001"</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"supplier"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"09c8...1e"</span>,
+      <span class="hljs-attr">"supplier_number"</span>: <span class="hljs-string">"L 1152"</span>,
+      <span class="hljs-attr">"display_name"</span>: <span class="hljs-string">"My supplier"</span>
+    },
+    <span class="hljs-attr">"supplier_name"</span>: <span class="hljs-string">"My supplier"</span>,
+    <span class="hljs-attr">"note"</span>: <span class="hljs-string">"My internal note"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"ebc266a9-4f80-41da-8a45-be17c9189c5b"</span>,
+        <span class="hljs-attr">"line_number"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"amount"</span>: <span class="hljs-number">12</span>,
+        <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+        <span class="hljs-attr">"net"</span>: <span class="hljs-number">12.00</span>,
+        <span class="hljs-attr">"tax"</span>: <span class="hljs-number">2.40</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">14.40</span>,
+        <span class="hljs-attr">"account"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9331...67"</span>,
+          <span class="hljs-attr">"code"</span>: <span class="hljs-string">"7600"</span>
+        },
+        <span class="hljs-attr">"taxes"</span>: {
+          <span class="hljs-attr">"tax_1"</span>: {
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.40</span>,
+            <span class="hljs-attr">"tax_class_entry"</span>: {
+              <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4db0...0e"</span>,
+              <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+              <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+            }
+          }
+        },
+        <span class="hljs-attr">"allowed_changes"</span>: [
+          <span class="hljs-string">"DELETION"</span>,
+          <span class="hljs-string">"..."</span>,
+          <span class="hljs-string">"DESCRIPTION"</span>
+        ]
+      }
+    ],
+    <span class="hljs-attr">"allowed_changes"</span>: [
+      <span class="hljs-string">"LINES_COUNT"</span>,
+      <span class="hljs-string">"..."</span>,
+      <span class="hljs-string">"SUPPLIER"</span>
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>booked</code> flag (and presence of a sequence) indicates that an invoice booking was created.
+To obtain all bookings for the invoice, simply use the <code>bookings</code> resource with the invoice ID.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request to fetch invoice bookings</div>
+<div class="content">
+<pre>GET https://demo.freefinance.at/api/2.0/clients/21334/cbi/incoming_invoices/6555...50/bookings
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"57b7...a1"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"cancelled"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">"reconciled"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">"journals"</span>: [
+        {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"220b...04"</span>,
+          <span class="hljs-attr">"number"</span>: <span class="hljs-string">"A2025 1"</span>,
+          <span class="hljs-attr">"journal_type"</span>: <span class="hljs-string">"OUTGO"</span>,
+          <span class="hljs-attr">"net"</span>: <span class="hljs-number">2.40</span>,
+          <span class="hljs-attr">"tax"</span>: <span class="hljs-number">2.40</span>,
+          <span class="hljs-attr">"total"</span>: <span class="hljs-number">14.40</span>
+        }
+      ],
+      <span class="hljs-attr">"payment_type"</span>: <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-attr">"payment_date"</span>: <span class="hljs-string">"2025-12-10"</span>,
+      <span class="hljs-attr">"payment_amount"</span>: <span class="hljs-number">14.40</span>,
+      <span class="hljs-attr">"contra_account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"8742...fb"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"2700"</span>
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_double_entry_accounting">Double Entry Accounting</h5>
+<div class="paragraph">
+<p>In double-entry accounting, creating an unpaid invoice also immediately creates a payables/receivables booking, and the invoice is always issued a sequence.
+The invoice date is always required.</p>
+</div>
+<div class="paragraph">
+<p>Paid <em>incoming invoices</em> where the invoice and paid date are equal do not follow this rule - in this case, only a singular payment booking is generated, similar to CMA.</p>
+</div>
+<div class="paragraph">
+<p>Incoming invoices with different invoice and paid dates and outgoing invoices always create an unpaid initial booking, and may create additional payment bookings (either immediately or with a later payment).</p>
+</div>
+<div class="paragraph">
+<p>Using the same <a href="https://freefinance-dev.github.io/#example_cbi_min">minimal example</a> for an incoming invoice in CMA clients, you’ll receive an invoice that already has a booking:</p>
+</div>
+<div class="listingblock">
+<div class="title">Response for an unpaid incoming invoice (shortened)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"c9ba...61"</span>,
+    <span class="hljs-attr">"invoice_sequence"</span>: <span class="hljs-string">"ER2025 1"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-01"</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"allowed_changes"</span>: [
+      <span class="hljs-string">"CANCELLATION"</span>
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>booked</code> flag is already true, and deletions are not possible.
+Fetching the bookings shows you the full amount booked against payables:</p>
+</div>
+<div class="listingblock">
+<div class="title">Response for the bookings of an unpaid incoming invoice in DEA</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"7df1...567"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"INITIAL_BOOKING"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"journals"</span>: [
+        {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"065b...f3"</span>,
+          <span class="hljs-attr">"number"</span>: <span class="hljs-string">"A2025 1"</span>,
+          <span class="hljs-attr">"journal_type"</span>: <span class="hljs-string">"OUTGO"</span>
+        }
+      ],
+      <span class="hljs-attr">"contra_account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"316a8310-297b-4e2d-8c0d-d78cc149e4d5"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"3300"</span>
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next example has a different invoice date and paid date, which results in a booking to the <em>payables</em> contra account and an additional payment booking against a <em>means of payment</em> account:</p>
+</div>
+<div class="listingblock">
+<div class="title">Request for a DEA incoming invoice with diverging dates</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21333/cbi/incoming_invoices
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-01"</span>,
+    <span class="hljs-attr">"paid_date"</span>: <span class="hljs-string">"2025-12-02"</span>,
+    <span class="hljs-attr">"paid_contra_account"</span>: <span class="hljs-string">"6b60...0c"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"87b6...4a"</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">20</span>,
+            <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"GROSS"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"4db0...0e"</span>
+                }
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"71f2e...9d"</span>,
+    <span class="hljs-attr">"invoice_sequence"</span>: <span class="hljs-string">"ER2025 2"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-01"</span>,
+    <span class="hljs-attr">"paid_date"</span>: <span class="hljs-string">"2025-12-02"</span>,
+    <span class="hljs-attr">"open"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"allowed_changes"</span>: [
+      <span class="hljs-string">"LINES_COUNT"</span>,
+      <span class="hljs-string">"INVOICE_DATE"</span>,
+      <span class="hljs-string">"PAID_DATE"</span>,
+      <span class="hljs-string">"DUE_DATE"</span>,
+      <span class="hljs-string">"TOTAL_AMOUNT"</span>
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>paid_contra_account</code> present in the request payload is not directly present on the resulting invoice, it is used to create a booking instead.
+Also, cancellations are no longer possible: any existing payment bookings, even those created implicitly, must be canceled first before the invoice itself can be canceled.</p>
+</div>
+<div class="paragraph">
+<p>Fetching the bookings now returns two, one for the initial payables booking and one for the actual payment:</p>
+</div>
+<div class="listingblock">
+<div class="title">Response for the bookings of a paid incoming invoice in DEA</div>
+<div class="content">
+<pre>HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"8c2f...03"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"INITIAL_BOOKING"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"journals"</span>: [
+        {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4760...ac"</span>,
+          <span class="hljs-attr">"number"</span>: <span class="hljs-string">"A2025 2"</span>,
+          <span class="hljs-attr">"journal_type"</span>: <span class="hljs-string">"OUTGO"</span>
+        }
+      ],
+      <span class="hljs-attr">"contra_account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"3168...d5"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"3300"</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"8a61...02"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">"journals"</span>: [
+        {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"e009...8d"</span>,
+          <span class="hljs-attr">"number"</span>: <span class="hljs-string">"U2025 8"</span>,
+          <span class="hljs-attr">"journal_type"</span>: <span class="hljs-string">"REBOOK"</span>
+        }
+      ],
+      <span class="hljs-attr">"payment_type"</span>: <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-attr">"payment_date"</span>: <span class="hljs-string">"2025-12-02"</span>,
+      <span class="hljs-attr">"payment_amount"</span>: <span class="hljs-number">20.00</span>,
+      <span class="hljs-attr">"contra_account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"6b60...0c"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"2800"</span>
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There is no difference in the result between an invoice already being created as paid, or first being created as unpaid and then paid in a follow-up request.
+The option of creating an already paid invoice is just for convenience.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_outgoing_invoices">4.3.2. Outgoing Invoices</h4>
+<div class="paragraph">
+<p>The endpoints (<code>/cbi/outgoing_invoices</code>) are the same as their counterpart for incoming invoices, with some minor differences in available fields (customer vs. supplier) and a different class of accounts for the invoice lines.
+Operations like payment and cancellation also work the same way.</p>
+</div>
+<div class="paragraph">
+<p>For DEA, outgoing invoices always have an unpaid initial booking when creating a paid invoice, regardless of the dates being equal or not.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you have the Invoicing (INV) module available, outgoing invoices might seem redundant when you can create fully-featured invoices with PDFs instead.
+However, outgoing invoices still have their use when you need to register an income without requiring a full INV invoice with all its features, or simply don’t need to create a PDF.
+Both CBI outgoing invoices and INV invoices can be created and used in the same client.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>This example creates an unpaid outgoing invoice with the minimal set of required fields.
+You’ll note that it has the same structure as the incoming invoice, only the <em>account</em> and <em>tax class entry</em> differ - you’d query the accounts for the <code>INCOME</code> use instead, and use the available tax class entries for them.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for a minimal outgoing invoice</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/cbi/outgoing_invoices
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-31"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"86ed...72"</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">100</span>,
+            <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"dec0...28"</span>
+                }
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"38c5...b6"</span>,
+    <span class="hljs-attr">"invoice_sequence"</span>: <span class="hljs-string">"AR2025 1"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-31"</span>,
+    <span class="hljs-attr">"currency"</span>: {
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"EUR"</span>
+    },
+    <span class="hljs-attr">"net"</span>: <span class="hljs-number">100.00</span>,
+    <span class="hljs-attr">"tax"</span>: <span class="hljs-number">20.00</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">120.00</span>,
+    <span class="hljs-attr">"open"</span>: <span class="hljs-number">120.00</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"lines"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"7ed5...64"</span>,
+        <span class="hljs-attr">"line_number"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"amount"</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+        <span class="hljs-attr">"net"</span>: <span class="hljs-number">100.00</span>,
+        <span class="hljs-attr">"tax"</span>: <span class="hljs-number">20.00</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">120.00</span>,
+        <span class="hljs-attr">"account"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"86ed...72"</span>,
+          <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+        },
+        <span class="hljs-attr">"taxes"</span>: {
+          <span class="hljs-attr">"tax_1"</span>: {
+            <span class="hljs-attr">"tax_class_entry"</span>: {
+              <span class="hljs-attr">"id"</span>: <span class="hljs-string">"dec05...28"</span>,
+              <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+              <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+            }
+          }
+        }
+      }
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next example creates a paid outgoing invoice with a customer from the <code>/cbi/customers</code> resource and a different currency (USD).</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for an outgoing invoice with customer in foreign currency</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/cbi/outgoing_invoices
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-31"</span>,
+    <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"USD"</span>,
+    <span class="hljs-attr">"currency_rate"</span>: <span class="hljs-number">0.8</span>,
+    <span class="hljs-attr">"customer"</span>: <span class="hljs-string">"af8f...87"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"a678...fd"</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">100</span>,
+            <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"9eca...cc"</span>
+                }
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"invoice"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"5565fbcb-3d06...dd"</span>,
+    <span class="hljs-attr">"invoice_date"</span>: <span class="hljs-string">"2025-12-31"</span>,
+    <span class="hljs-attr">"currency"</span>: {
+      <span class="hljs-attr">"code"</span>: <span class="hljs-string">"USD"</span>
+    },
+    <span class="hljs-attr">"currency_rate"</span>: <span class="hljs-number">0.8</span>,
+    <span class="hljs-attr">"net"</span>: <span class="hljs-number">100.00</span>,
+    <span class="hljs-attr">"tax"</span>: <span class="hljs-number">20.00</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">120.00</span>,
+    <span class="hljs-attr">"open"</span>: <span class="hljs-number">120.00</span>,
+    <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">96.00</span>,
+    <span class="hljs-attr">"booked"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"customer"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"af8f...87"</span>,
+      <span class="hljs-attr">"customer_number"</span>: <span class="hljs-string">"C 1142"</span>,
+      <span class="hljs-attr">"display_name"</span>: <span class="hljs-string">"My Customer"</span>
+    },
+    <span class="hljs-attr">"lines"</span>: [
+      {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"0ce7...0d"</span>,
+        <span class="hljs-attr">"line_number"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"amount"</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"NET"</span>,
+        <span class="hljs-attr">"net"</span>: <span class="hljs-number">100.00</span>,
+        <span class="hljs-attr">"tax"</span>: <span class="hljs-number">20.00</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">120.00</span>,
+        <span class="hljs-attr">"account"</span>: {
+          <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a678...fd"</span>,
+          <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Revenue (income)"</span>,
+          <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+        },
+        <span class="hljs-attr">"taxes"</span>: {
+          <span class="hljs-attr">"tax_1"</span>: {
+            <span class="hljs-attr">"tax_class_entry"</span>: {
+              <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+              <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+              <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+            }
+          }
+        },
+        <span class="hljs-attr">"allowed_changes"</span>: [
+          <span class="hljs-string">"DELETION"</span>,
+          <span class="hljs-string">"ACCOUNT_INFO"</span>,
+          <span class="hljs-string">"AMOUNT"</span>,
+          <span class="hljs-string">"DESCRIPTION"</span>
+        ]
+      }
+    ],
+    <span class="hljs-attr">"allowed_changes"</span>: [
+      <span class="hljs-string">"DELETION"</span>,
+      <span class="hljs-string">"PAYMENT"</span>,
+      <span class="hljs-string">"REST_PAYMENT"</span>,
+      <span class="hljs-string">"LINES_COUNT"</span>,
+      <span class="hljs-string">"INVOICE_DATE"</span>,
+      <span class="hljs-string">"INVOICE_YEAR"</span>,
+      <span class="hljs-string">"DUE_DATE"</span>,
+      <span class="hljs-string">"CURRENCY"</span>,
+      <span class="hljs-string">"TOTAL_AMOUNT"</span>,
+      <span class="hljs-string">"DESCRIPTION"</span>,
+      <span class="hljs-string">"NOTE"</span>,
+      <span class="hljs-string">"INVOICE_REFERENCE"</span>,
+      <span class="hljs-string">"PAYMENT_REFERENCE"</span>,
+      <span class="hljs-string">"DELIVERY_SPAN"</span>,
+      <span class="hljs-string">"CUSTOMER"</span>
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="itm_examples">4.4. Items</h3>
+<div class="paragraph">
+<p>Items are part of the master data of a client, they are reusable definitions of a revenue line used in INV invoices and cash receipts.
+For use in the API, creating items beforehand (with accounts, tax class entries, prices and descriptions already included) allows you to create invoices and receipts quickly by referencing an item and enabling item defaulting.
+Alternatively, if you want to have complete control over the data of the line, you can take the values of the items and apply them to invoice and receipt lines yourself.</p>
+</div>
+<div class="sect3">
+<h4 id="_creating_an_item">4.4.1. Creating an item</h4>
+<div class="paragraph">
+<p>Without an item category, an <a href="https://freefinance-dev.github.io/#cbs_examples">account and tax class entry</a> are required for an item.
+Below is a minimal example with one tax group - if the country of the client has multiple taxes, an entry is required for all of them.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for a minimal item</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/itm/items
+Content-Type: application/json
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My Example Item"</span>,
+    <span class="hljs-attr">"account"</span>: <span class="hljs-string">"a678....fd"</span>,
+    <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"N"</span>,
+    <span class="hljs-attr">"selling_price"</span>: <span class="hljs-number">100.00</span>,
+    <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+            <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"9eca...cc"</span>
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example response for a minimal item</div>
+<div class="content">
+<pre>HTTP/2 201
+Content-Type: application/json</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"2de5...c5"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My Example Item"</span>,
+  <span class="hljs-attr">"account"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a678...fd"</span>,
+    <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+  },
+  <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"N"</span>,
+  <span class="hljs-attr">"selling_price"</span>: <span class="hljs-number">100.00</span>,
+  <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"EUR"</span>,
+  <span class="hljs-attr">"visible"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"taxes"</span>: {
+    <span class="hljs-attr">"tax_1"</span>: {
+      <span class="hljs-attr">"tax_class_entry"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+        <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the <code>account</code> and <code>tax_class_entry</code> IDs were taken from our examples from the previous chapter.
+You can retrieve all available accounts by using the <em>INV</em> account use for the <code>cbs/accounts</code> resource.</p>
+</div>
+<div class="paragraph">
+<p>The <code>amount_type</code> specifies if the <code>selling_price</code> is <strong>N</strong>et before tax, or <strong>T</strong>otal after tax.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also supply a <code>number</code> and use it to save the internal ID or code of your application for the item.
+This makes it easier later to fetch an item directly by this number, in case you don’t want to store the generated item ID in your application.
+The API will however not ensure uniqueness, so you have to handle the case of multiple items being returned.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The item can also be assigned an <code>item_category</code>.
+If the item category has valid defaults for the account and tax class entry, they will be copied down to the item and need not be supplied in the item creation payload.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fetching_items">4.4.2. Fetching items</h4>
+<div class="paragraph">
+<p>The <code>itm/items</code> resource accepts the <code>category</code> query parameter for the ID of a category the item belongs to, and a generic <code>search</code> parameter to filter for the name, description, number or barcode.
+This way you can either present a list of items for selection, or fetch the one result to use directly in subsequent API calls to create invoices or receipts.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example search for an item</div>
+<div class="content">
+<pre>GET https://demo.freefinance.at/api/2.0/clients/21334/itm/items?category=ad94...d5&amp;search=apple
+Authorization: Bearer {{$auth.token("ffappl")}}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example response for searching items</div>
+<div class="content">
+<pre>HTTP/2 200
+Content-Type: application/json</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"total_count"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"content"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"088c...0c"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Apple Tree"</span>,
+      <span class="hljs-attr">"item_category"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"ad94...d5"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Apple Trees"</span>
+      },
+      <span class="hljs-attr">"account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a678...fd"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+      },
+      <span class="hljs-attr">"amount_type"</span>: <span class="hljs-string">"N"</span>,
+      <span class="hljs-attr">"selling_price"</span>: <span class="hljs-number">100.00</span>,
+      <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"EUR"</span>,
+      <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"tax_class_entry"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+            <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+          }
+        }
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_invoicing">4.5. Invoicing</h3>
+<div class="paragraph">
+<p>This section introduces the creation of invoices, one of the most used features of the API.
+Before you jump in, make sure you have read the <a href="https://freefinance-dev.github.io/#cbs_examples">bookkeeping essentials</a> and optionally the <a href="https://freefinance-dev.github.io/itm.html#itm_examples">item API</a>.</p>
+</div>
+<div class="paragraph">
+<p>Make sure not to confuse the invoicing from the INV feature (see the INV tag in the OpenAPI spec) with outgoing invoices from the CBI module (the CBI-OUT tag).
+CBI outgoing invoices are a simpler version only used for bookkeeping, while the INV module is more extensive with features like the PDF generation, per-line discounts, etc.</p>
+</div>
+<div class="paragraph">
+<p>In general, you use the CBI module to track invoices created somewhere else, while you can use INV to create invoices in FreeFinance itself.
+Clients can use both modules concurrently for different use cases, but most users only require one or the other.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The full invoicing API is only available in the higher subscription tiers.
+If you get 403 errors when trying any invoicing API, check if you have purchased the invoicing feature (Plus tier and above) and your user (or the <a href="https://freefinance-dev.github.io/#auth_tu">Technical User</a>) has the appropriate permissions.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Invoices, along with all other document types from the invoicing module (offers, delivery notes, etc.) can be created in two major states: <em>Staging</em> documents are in a draft mode and can be freely edited and changed.
+Once a document is <em>finalized</em>, all corresponding documents are generated (PDF, XML) and further edits are restricted.</p>
+</div>
+<div class="sect3">
+<h4 id="_prerequisites">4.5.1. Prerequisites</h4>
+<div class="paragraph">
+<p>To create a <em>staging</em> invoice, at least one (default) payment term must exist, since the term defines the due date of the invoice.
+If no payment term is referenced, the default payment term is applied automatically.
+(Other invoicing documents like offers don’t require a payment term.)</p>
+</div>
+<div class="paragraph">
+<p>To create <em>finalized</em> invoices or to finalize existing ones, the following additional prerequisites are required:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <em>sequence group</em> exists and is initialized with the current year.
+Sequence groups contain one sequence per document type and define the appearance and current sequence number of invoicing documents.</p>
+</li>
+<li>
+<p>At least one <em>layout setup</em> exists.
+The layout setup defines the appearance of the generated PDF documents, the header and footer, bank information, and so on.
+Like with the payment terms the default layout setup is applied automatically, if one exists.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The prerequisite setup can be completed in the UI.
+Payment terms and layout setups don’t expire, but sequence groups require new sequences to be created every year.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_staging_invoices">4.5.2. Staging invoices</h4>
+<div class="paragraph">
+<p>Here is the minimal example for creating an invoice, with an unreferenced customer and explicit values for the account and tax class.
+A default payment term must exist and will be selected automatically.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for a minimal invoice</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/inv/invoices
+Content-Type: application/json
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+    <span class="hljs-attr">"customer_name"</span>: <span class="hljs-string">"Ernest Example"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"An invoice line"</span>,
+            <span class="hljs-attr">"item_price"</span>: <span class="hljs-number">123.45</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>,
+            <span class="hljs-attr">"price_type"</span>: <span class="hljs-string">"NET"</span>,
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"a678...fd"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"9eca...cc"</span>
+                }
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example response for a minimal invoice</div>
+<div class="content">
+<pre>HTTP/2 201
+Content-Type: application/json</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"232a...73"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"INVOICE"</span>, <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="hljs-attr">"state"</span>: <span class="hljs-string">"STAGING"</span>, <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+  <span class="hljs-attr">"due_date"</span>: <span class="hljs-string">"2025-12-11"</span>, <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="hljs-attr">"paid"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"net"</span>: <span class="hljs-number">246.90</span>,
+  <span class="hljs-attr">"tax"</span>: <span class="hljs-number">49.38</span>,
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>, <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="hljs-attr">"open"</span>: <span class="hljs-number">296.28</span>,
+  <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">296.28</span>,
+  <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"EUR"</span>,
+  <span class="hljs-attr">"customer_name"</span>: <span class="hljs-string">"Ernest Example"</span>,
+  <span class="hljs-attr">"payment_term"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"178c...19"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Standard"</span>
+  },
+  <span class="hljs-attr">"payment_term_description"</span>: <span class="hljs-string">"30 days"</span>,
+  <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2025-11-27T21:10:55.1..."</span>,
+  <span class="hljs-attr">"updated_at"</span>: <span class="hljs-string">"2025-11-27T21:10:55.2..."</span>,
+  <span class="hljs-attr">"lines"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"4da1...75"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">1</span>, <i class="conum" data-value="5"></i><b>(5)</b>
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"An invoice line"</span>,
+      <span class="hljs-attr">"account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"cec4...f5"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+      },
+      <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"amount"</span>: <span class="hljs-number">49.38</span>,
+          <span class="hljs-attr">"tax_class_entry"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+            <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+          }
+        }
+      },
+      <span class="hljs-attr">"net"</span>: <span class="hljs-number">246.90</span>,
+      <span class="hljs-attr">"open"</span>: <span class="hljs-number">296.28</span>,
+      <span class="hljs-attr">"open_in_main_currency"</span>: <span class="hljs-number">296.28</span>,
+      <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>,
+      <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>,
+      <span class="hljs-attr">"item_price"</span>: <span class="hljs-number">123.45</span>,
+      <span class="hljs-attr">"price_type"</span>: <span class="hljs-string">"NET"</span>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The type is determined by the API endpoint you used.
+It might seem redundant, but is included for completeness as there are resources to fetch all invoicing document types in a general search.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The state is determined by the endpoint as well and can’t be set or changed by anything other than API operations.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The due date was set by the payment term.
+You can supply it for verification purposes, but it must match the <em>due days</em> setting in the payment term.
+If you configured the term to not have a set number of days, you must supply the <code>due_date</code> in the payload.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The totals of the invoice and each line were calculated by the API.
+You can also supply the totals for verification, triggering an error on mismatch.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The number of each line is assigned by the order of the lines in the payload <code>lines</code> array.
+Adding and removing lines of an existing invoice will overwrite the number of each existing line to match the order of the payload each time.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Another way of supplying invoice lines is by referencing an <em>item</em>.
+This can be either done just as a reference (and all other values of the lines are still determined by your payload) or with the optional per-line property <code>item_defaulting</code>, which instructs the API to apply all item values that weren’t supplied in the payload.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can enable or disable item defaulting for each line separately.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Additionally, the <em>customer</em> can also be given as a reference instead of just a string with a name.
+Creating customers in your client master data and later referencing them in invoices is a prerequisite for detailed customer revenue reports and (for double-entry accounting) tracking the receivables of each customer in their own bookkeeping accounts.</p>
+</div>
+<div class="paragraph">
+<p>The next example references the example <em>item</em> created in the previous chapter and a <em>customer</em> by their IDs.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for a minimal invoice using references</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/inv/invoices
+Content-Type: application/json
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+    <span class="hljs-attr">"customer"</span>: <span class="hljs-string">"af8f...87"</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"item"</span>: <span class="hljs-string">"088c...0c"</span>,
+            <span class="hljs-attr">"item_defaulting"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Without the <code>item_defaulting</code> flag, the item is only set as a reference, which means that all mandatory line properties must be present in the payload.
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_finalized_invoices">4.5.3. Finalized invoices</h4>
+<div class="paragraph">
+<p>Any invoicing document can be finalized immediately on creation (with <code>finalize: true</code> in the payload) or later on during an update or with an explicit API call (with <code>/inv/invoices/{id}/finalize</code>).</p>
+</div>
+<div class="paragraph">
+<p>Finalization requires a <em>layout setup</em> for the generated PDF (and optionally XML) file as part of the <a href="https://freefinance-dev.github.io/#_prerequisites">Prerequisites</a>, with the default being applied if none is set in the payload.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for a finalized invoice</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/inv/invoices
+Content-Type: application/json
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+    <span class="hljs-attr">"customer"</span>: <span class="hljs-string">"af8f...87"</span>,
+    <span class="hljs-attr">"finalize"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"item"</span>: <span class="hljs-string">"088c...0c"</span>,
+            <span class="hljs-attr">"item_defaulting"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example response for a finalized invoice</div>
+<div class="content">
+<pre>HTTP/2 201
+Content-Type: application/json</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-string">"352a...a6"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"INVOICE"</span>,
+  <span class="hljs-attr">"number"</span>: <span class="hljs-string">"R-2025.003"</span>, <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="hljs-attr">"state"</span>: <span class="hljs-string">"FINALIZED"</span>, <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>,
+  <span class="hljs-attr">"open"</span>: <span class="hljs-number">296.28</span>,
+  <span class="hljs-attr">"customer"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"af8f...87"</span>,
+    <span class="hljs-attr">"display_name"</span>: <span class="hljs-string">"Airbus, Emily Smith"</span>
+  },
+  <span class="hljs-attr">"payment_term"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"3708...d0"</span>, <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Standard"</span>
+  },
+  <span class="hljs-attr">"payment_term_description"</span>: <span class="hljs-string">"30 days"</span>,
+  <span class="hljs-attr">"current_file"</span>: {
+    <span class="hljs-attr">"key"</span>: {
+      <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"DMS"</span>,
+      <span class="hljs-attr">"provider_id"</span>: <span class="hljs-string">"c016...e0"</span> <i class="conum" data-value="4"></i><b>(<span class="hljs-number">4</span>)</b>
+    },
+    <span class="hljs-attr">"file_name"</span>: <span class="hljs-string">"Invoice_I-2025.003.pdf"</span>
+  },
+  <span class="hljs-attr">"lines"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"581f...13"</span>,
+      <span class="hljs-attr">"number"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"LINE"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"An invoice line"</span>,
+      <span class="hljs-attr">"account"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"a678...fd"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Revenue (income)"</span>,
+        <span class="hljs-attr">"code"</span>: <span class="hljs-string">"4000"</span>
+      },
+      <span class="hljs-attr">"taxes"</span>: {
+        <span class="hljs-attr">"tax_1"</span>: {
+          <span class="hljs-attr">"amount"</span>: <span class="hljs-number">49.38</span>,
+          <span class="hljs-attr">"tax_class_entry"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"9eca...cc"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"020"</span>,
+            <span class="hljs-attr">"tax_rate_value"</span>: <span class="hljs-number">20</span>
+          }
+        }
+      },
+      <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>,
+      <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>,
+      <span class="hljs-attr">"item_price"</span>: <span class="hljs-number">123.45</span>,
+      <span class="hljs-attr">"price_type"</span>: <span class="hljs-string">"NET"</span>
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The number is issued from the sequence group and can’t be changed, even if the invoice is re-opened.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The FINALIZED state prevents most changes to the invoice.
+It can be re-opened if a mistake was made, which causes the PDF file to be deleted.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The payment term is also defaulted and referenced in the invoice.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The PDF file is referenced by a provider (which, for generated documents, is always the built-in DMS) and the id within that provider.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>To fetch the generated PDF file for the finalized invoice, you can use the files API.
+The <code>provider_id</code> in the <code>current_file</code> together with the provider itself (DMS in this case) is to be used as path parameter.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request to fetch the PDF of a finalized invoice</div>
+<div class="content">
+<pre>GET https://demo.freefinance.at/api/2.0/clients/21334/doc/providers/DMS/files/c016...e0/content
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example file response</div>
+<div class="content">
+<pre>HTTP/2 200
+Content-Disposition: attachment; filename="Invoice_I-2025.003.pdf"
+Content-Type: application/pdf;charset=UTF-8</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="inv_line_calc">4.5.4. Verification of total sums</h4>
+<div class="paragraph">
+<p>Supplying the expected invoice totals in the payload for invoice creation is optional.
+But if you use net amounts, we  <strong>strongly recommend</strong> including the totals to prevent sudden discrepancies.</p>
+</div>
+<div class="paragraph">
+<p>There are multiple valid methods for computing invoice totals, and many tax jurisdictions don’t enforce one over the others.
+Here are some examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The tax amount and totals of each line are calculated and rounded to a currency amount.
+The invoice totals are the sums of all line totals.
+This is the approach used by FreeFinance.</p>
+</li>
+<li>
+<p>The totals of each line (with more than 2 decimal places) are not rounded, but added up to the invoice totals.
+Rounding occurs in the last step for all totals.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the calculation method of your system doesn’t align with ours, rounding differences will occur in some circumstances.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Not providing any totals and ignoring the possibility of rounding discrepancies lets you avoid any verification errors, but may cause large problems later on in production environments.</p>
+</div>
+<div class="paragraph">
+<p>In the worst case the total invoice amount calculated by the API unexpectedly shifts by a few cents.
+This might go largely unnoticed if you don’t verify the sums you receive in the response in turn.</p>
+</div>
+<div class="paragraph">
+<p>Your customers may suddenly receive an invoice with an amount that is higher than the initial purchase your system calculated.
+If your application also registers payments (with the open amount you expected), an invoice that was paid in your application is still marked as unpaid in ours (as those few cents still need to be paid).</p>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Supplying invoice totals for verification prevents that, as any discrepancies instantly cause the invoice creation to fail.<br>
+If you can’t adapt your system’s calculation to ours, the best alternative we can offer is to <strong>lock in the total amounts</strong>.
+This allows minor discrepancies in the net and tax amounts, but the sum of those discrepancies usually ends up to be an insignificant amount.
+We find that to be an acceptable tradeoff to ensure that created invoices, with their amount and state, match your application’s expectations.</p>
+</div>
+<div class="paragraph">
+<p>To achieve this and ensure consistent total amounts with newly created invoices, follow these steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the <code>price_type</code> of all lines to <code>GROSS</code>.
+This ensures that the line total is calculated as the <code>item_price</code> (with tax already included) multiplied with the <code>amount</code>.
+The net and tax totals are calculated backwards from the total amount and the tax rate.</p>
+</li>
+<li>
+<p>Include the line total amounts in the payload rounded to a currency amount.
+If your application rounds with the invoice totals only, you must first calculate the invoice total as a currency amount and divide that amount between the line totals.</p>
+</li>
+<li>
+<p>Do not include the net and tax sums in your payload to bypass verification of those fields.
+This means that the unavoidable discrepancies are permitted, but contained to net and tax totals.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here is an example:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example request for an invoice with totals verified</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/inv/invoices/
+Content-Type: application/json
+Authorization: eyJ...</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+    <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2025-11-11"</span>,
+    <span class="hljs-attr">"customer_name"</span>: <span class="hljs-string">"Ernest Example"</span>,
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>,
+    <span class="hljs-attr">"lines"</span>: [
+        {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"An invoice line"</span>,
+            <span class="hljs-attr">"item_price"</span>: <span class="hljs-number">148.14</span>,
+            <span class="hljs-attr">"amount"</span>: <span class="hljs-number">2.00</span>,
+            <span class="hljs-attr">"price_type"</span>: <span class="hljs-string">"GROSS"</span>,
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">296.28</span>,
+            <span class="hljs-attr">"account"</span>: <span class="hljs-string">"a678...fd"</span>,
+            <span class="hljs-attr">"taxes"</span>: {
+                <span class="hljs-attr">"tax_1"</span>: {
+                    <span class="hljs-attr">"tax_class_entry"</span>: <span class="hljs-string">"9eca...cc"</span>
+                }
+            }
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Any discrepancy in the invoice total or line totals will raise a validation error, but net and tax totals may shift by a few cents.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pdf_and_image_upload">4.6. PDF and image upload</h3>
+<div class="paragraph">
+<p>With this API you can upload files (PDF, XML and images) to the staging folder of the client.
+The files are then available in the <em>My Invoices</em> → <em>Posting by PDF/File</em> view of the application, which allows creating incoming/outgoing invoices and rebooks with them.</p>
+</div>
+<div class="paragraph">
+<p>When uploading a PDF file or image, the built-in OCR detection feature extracts key information like the date, invoice amount, supplier etc. from it.
+This metadata is then used for suggestions when creating invoices.</p>
+</div>
+<div class="paragraph">
+<p>For example, if the VAT number of a supplier is found, the suppliers in your master data are queried for a supplier with such a number.
+The invoice total is defaulted as amount, and so on.
+The list of known metadata keys in the OpenAPI specification shows you what kind of information can be extracted.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+With proper preparation of your customers and suppliers, you can minimize the work required to create invoices: If they have VAT numbers and defaults for account and tax class entry, the UI can match them and fill all required fields when creating an incoming/outgoing invoice.
+You only need to do a quick review and a final click, rather than entering all data manually each time.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>While the API also allows adding a list of metadata to the upload with well-known keys, custom metadata is ignored by the application to prevent inconsistent behavior and errors due to faulty data.
+If you don’t need the OCR detection feature and want to provide metadata yourself, contact us to mark your application as trusted.</p>
+</div>
+<div class="paragraph">
+<p>Well-known XML formats like X-Invoice are parsed automatically.
+The same is true if a PDF has an embedded XML - OCR is skipped and the XML data has priority.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The upload API only allows files with a maximum size of 2 MB.
+If your files exceed this limit (and you can’t compress them), connect an external storage provider like Dropbox, Google Drive, or Onedrive.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect3">
+<h4 id="_upload_a_document_to_the_staging_folder">4.6.1. Upload a document to the staging folder</h4>
+<div class="paragraph">
+<p>Unlike other resources in the API, the staging upload accepts a <code>multipart/form-data</code> request.<br>
+It consists of two parts: an optional JSON payload with metadata like a description, and one or multiple binary attachments.
+The file name is taken from the <code>Content-Disposition</code> of the first attachment and must not be already present in the folder.</p>
+</div>
+<div class="listingblock">
+<div class="title">Minimal example for a simple file upload</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/doc/providers/DMS/staging
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>--WebAppBoundary
+Content-Disposition: form-data; name="content"; filename="document.pdf"
+Content-Type: application/pdf
+
+&lt;!-- raw content of document.pdf --&gt;
+
+--WebAppBoundary--</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Response of a file upload</div>
+<div class="content">
+<pre>HTTP/1.1 201
+Content-Type: application/json;charset=UTF-8</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  <span class="hljs-attr">"key"</span>: {
+    <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"DMS"</span>,
+    <span class="hljs-attr">"provider_id"</span>: <span class="hljs-string">"30ac...c6"</span>
+  },
+  <span class="hljs-attr">"file_name"</span>: <span class="hljs-string">"document.pdf"</span>,
+  <span class="hljs-attr">"content_type"</span>: <span class="hljs-string">"application/pdf"</span>,
+  <span class="hljs-attr">"parent_folder"</span>: {
+    <span class="hljs-attr">"provider"</span>: <span class="hljs-string">"DMS"</span>,
+    <span class="hljs-attr">"provider_id"</span>: <span class="hljs-string">"975c...36"</span>
+  },
+  <span class="hljs-attr">"size"</span>: <span class="hljs-number">11782</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The uploaded file is now ready in the staging folder and will be processed by OCR.
+If no OCR processing is required, you can supply the property <code>"skip_ocr": true</code>.</p>
+</div>
+<div class="paragraph">
+<p>If your application doesn’t support multipart requests, you can upload the file base64-encoded as part of the JSON payload instead.
+This creates additional overhead, so only use it if multipart support can’t be achieved.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example for a file upload with base64-encoded content</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/doc/providers/DMS/staging/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+    "file_name": "document-json.pdf",
+    "content_type": "application/pdf",
+    "content": "JVBERi0xLjIN...0YNCg==",
+    "description": "My example file with base64"
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The response is the same as with the multipart upload.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_upload_a_document_with_metadata">4.6.2. Upload a document with metadata</h4>
+<div class="paragraph">
+<p>If your application is allowed to provide metadata, you can supply it with the multipart or base64-json request.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example for a file upload with sidecar JSON metadata</div>
+<div class="content">
+<pre>POST https://demo.freefinance.at/api/2.0/clients/21334/doc/providers/DMS/staging
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer eyJhbGci...Vm-yw</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>--WebAppBoundary
+Content-Disposition: form-data; name="metadata"
+Content-Type: application/json
+
+{
+  "description": "Example PDF", <i class="conum" data-value="1"></i><b>(1)</b>
+  "skip_ocr": true, <i class="conum" data-value="2"></i><b>(2)</b>
+    "metadata": [ <i class="conum" data-value="3"></i><b>(3)</b>
+    {
+      "key": "MERCHANT_NAME", <i class="conum" data-value="4"></i><b>(4)</b>
+      "text_value": "My Test Company"
+    },
+    {
+      "key": "PAID_DATE",
+      "date_value": "2021-05-01"
+    },
+    {
+      "key": "TOTAL_AMOUNT",
+      "numeric_value": 100.00,
+      "qualifier": 1 <i class="conum" data-value="5"></i><b>(5)</b>
+    },
+    {
+      "key": "TAX_RATE",
+      "numeric_value": 20,
+      "qualifier": 1
+    },
+    {
+      "key": "TOTAL_AMOUNT",
+      "numeric_value": 200.00,
+      "qualifier": 2
+    },
+    {
+      "key": "TAX_RATE",
+      "numeric_value": 10,
+      "qualifier": 2
+    }
+
+  ]
+}
+--WebAppBoundary
+Content-Disposition: form-data; name="content"; filename="document-1.pdf"
+Content-Type: application/pdf
+
+&lt;!-- raw content of document1.pdf --&gt;
+
+--WebAppBoundary--</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If one is provided, the description will be used instead of the file name for listings in the UI.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>With this flag no OCR processing will be done, which is useful if you supply the metadata yourself.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If you have to use the base64-json variant, supply the <code>metadata</code> array as a regular property of the payload.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>To find available keys, you can consult the  <a href="https://freefinance-dev.github.io/#openapi_spec">OpenAPI specification</a>.
+The data type depends on the key (text, date, numeric, boolean).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The qualifier limits the scope of this metadata entry to a sub-element of the invoice, in this case a single invoice line.
+All entries with the same qualifier apply to one specific line instead of the entire invoice.</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_faq">5. FAQ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q:</strong> Where do I get a token for the API?<br>
+<strong>A:</strong> Tokens are obtained from a dedicated IDP under a different URL.
+The API can provide it to you with the <code>/auth/issuer</code> resource.
+See <a href="https://freefinance-dev.github.io/#_authentication">Authentication</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q:</strong> I got the client id and secret for a Technical User and only get 403 errors when trying any resource under a client.
+What do I have to use as path parameter for the client?<br>
+<strong>A:</strong> The <em>API client id</em> for the Technical User consists of two number separated by a '_' character and is accompanied by an <em>API client secret</em>.
+The first half before the separator is the actual client id for the bookkeeping client and the second is a random suffix.
+If your API client id looks like <code>1234_987654321</code>, then <code>1234</code> is the client ID you should use as path parameter for API requests, like <code>/api/2.0/clients/1234/cbs/accounts</code>.
+See <a href="https://freefinance-dev.github.io/#_clients">Clients</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2025-12-19 21:22:27 +0100
+</div>
+</div>
+<script src="./FreeFinance REST API_files/highlight.min.js.Download"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
+
+</body></html>
