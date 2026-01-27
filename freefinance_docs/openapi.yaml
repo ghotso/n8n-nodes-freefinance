@@ -1,0 +1,676 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: support@freefinance.at
+    name: manubu gmbh
+    url: https://www.freefinance.at
+  description: The REST API to be used with FreeFinance and FinanzFenster. Please
+    read the examples for an introduction to authentication and some use cases.
+  title: FreeFinance REST API
+  version: 2.0.0-beta2
+externalDocs:
+  description: Detailed examples for authentication and base tasks can be found here.
+  url: https://freefinance-dev.github.io
+servers:
+- description: "The demo server, suitable for test implementations against production."
+  url: https://demo.freefinance.at
+- description: The QA server with the next version for testing.
+  url: https://app.qa.freefinance.at
+security:
+- bearerAuth: []
+tags:
+- description: Authentication information for API users.
+  name: AUTH
+- description: Bank Statement Lines - bank account transactions and PSD2.
+  name: BSL
+- description: Cash Based Invoicing - incoming invoices (expenses)
+  name: CBI-INC
+- description: Cash Based Invoicing - outgoing invoices (incomes).
+  name: CBI-OUT
+- description: "Cash Based Setup - financial setup, accounts and other setup data\
+    \ for booking"
+  name: CBS
+- description: Cash Based Setup - accounts for bookkeeping.
+  name: CBS-ACC
+- description: Cash Based Setup - payment accounts.
+  name: CBS-PAY
+- description: Information about the current client and its features & permissions.
+  name: CLIENT
+- description: Documents - staging upload of files with metadata.
+  name: DOC-STG
+- description: Financial Setup - global setup for taxation and bookkeeping.
+  name: FIS
+- description: "Foundation - global definitions for countries, currencies, etc."
+  name: FND
+- description: Invoicing - Full business documents with PDF generation.
+  name: INV
+- description: Invoicing - invoices and their payments.
+  name: INV-IV
+- description: Item Management - items for invoices and cash registers.
+  name: ITM
+- description: Master Data - customers.
+  name: MAS-CUS
+- description: Master Data - suppliers.
+  name: MAS-SUP
+- description: Point of Sale - handles cash register terminals.
+  name: POS
+- description: Point of Sale - daily closings.
+  name: POS-DC
+- description: Point of Sale - receipts.
+  name: POS-RCT
+- description: "Tagging and Cost Centers for customers, invoices, etc."
+  name: TAG
+paths:
+  /auth/issuer:
+    get:
+      description: Returns information about the trusted issuer used to authenticate
+        with this portal.
+      operationId: getAuthIssuerInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthIssuerInfoDtoV2'
+          description: Operation completed successfully.
+      tags:
+      - AUTH
+  /clients:
+    get:
+      description: Returns all clients the authenticated user has access to.
+      operationId: getAllClients
+      parameters:
+      - description: Limit of results.
+        in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+      - description: Offset to start with result set
+        in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+      - description: Only include clients for which the user has any of these permissions.
+        explode: false
+        in: query
+        name: permissions
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+      - description: Only include clients with these product types.
+        explode: false
+        in: query
+        name: product_types
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - CMA
+            - RLA
+            - DEA
+            - ACT
+            - BNK
+            - AFF
+            - ADM
+            - EXT
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientResultDtoV2'
+          description: Operation completed successfully.
+      security:
+      - bearerAuth: []
+      tags:
+      - CLIENT
+  /clients/{client_id}:
+    get:
+      description: Returns a specific client the authenticated user has access to.
+      operationId: getClient
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDtoV2'
+          description: Operation completed successfully.
+      security:
+      - bearerAuth: []
+      tags:
+      - CLIENT
+  /clients/{client_id}/avatar:
+    get:
+      description: Get the current avatar of the client. The /settings resource indicates
+        if the client has an avatar present.
+      operationId: getClientAvatar
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+          description: Operation completed successfully.
+        "204":
+          description: No Content present
+      security:
+      - bearerAuth: []
+      tags:
+      - CLIENT
+  /clients/{client_id}/bsl/bank_statements:
+    get:
+      description: Returns all bank statements. This includes both manual imports
+        as well as automated PSD2 statements.
+      operationId: getAllBankStatementHeaders
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: Filters for the payment account the statement belongs to.
+        example:
+          value: 5665af78-cc67-490-b030-f649fde5d8a8
+        in: query
+        name: payment_account
+        schema:
+          type: string
+      - description: Minimum date the statement was created or modified. Defaults
+          to the beginning of the current year.
+        example:
+          value: 2024-08-01
+        in: query
+        name: from
+        schema:
+          type: string
+          format: date
+          pattern: yyyy-MM-dd
+      - description: Maximum date the statement was created or modified. Defaults
+          to the end of the current year.
+        example:
+          value: 2024-08-02
+        in: query
+        name: to
+        schema:
+          type: string
+          format: date
+          pattern: yyyy-MM-dd
+      - description: Only include bank statements that are in any of these states.
+          Defaults to all states.
+        explode: false
+        in: query
+        name: states
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - NEW
+            - IN_PROGRESS
+            - RECONCILED
+            - DELETED
+        style: form
+      - description: Only include bank statements that match these creation types.
+          Defaults to all types.
+        explode: false
+        in: query
+        name: types
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - MANUAL
+            - PSD2
+            - CAMT
+            - API
+        style: form
+      - description: Limit of results.
+        in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+      - description: Offset to start with result set
+        in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+      - description: Comma separated list of sort params. The direction could append
+          to the sort property by a colon.
+        example: "name:ASC,status:DESC"
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankStatementResultDtoV2'
+          description: Operation completed successfully.
+      security:
+      - bearerAuth: []
+      tags:
+      - BSL
+  /clients/{client_id}/bsl/bank_statements/{id}:
+    get:
+      description: Returns a single bank statement by ID.
+      operationId: getBankStatement
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankStatementDtoV2'
+          description: Operation completed successfully.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Resource not found.
+      security:
+      - bearerAuth: []
+      tags:
+      - BSL
+  /clients/{client_id}/bsl/bank_statements/{id}/lines:
+    get:
+      description: Returns the bank statement lines for a statement.
+      operationId: getBankStatementLines
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: Statement ID
+        example:
+          value: 5665af78-cc67-490-b030-f649fde5d8a8
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: "Minimum date. Default: Today one year ago"
+        example: 2024-08-01
+        in: query
+        name: from
+        schema:
+          type: string
+          format: date
+          pattern: yyyy-MM-dd
+      - description: "Maximum date. Default: Today"
+        example: 2024-08-01
+        in: query
+        name: to
+        schema:
+          type: string
+          format: date
+          pattern: yyyy-MM-dd
+      - description: Filters for a special status type of the line. Per default all
+          types are returned.
+        in: query
+        name: line_type
+        schema:
+          type: string
+          enum:
+          - NEW
+          - SKIPPED
+          - RECONCILED
+          - BOOKED
+          - IN_PROGRESS
+          - BOOKED_AND_SKIPPED
+          - NOT_RECONCILED
+      - description: Filters for a special amount type of the line. Per default all
+          types are returned.
+        in: query
+        name: amount_type
+        schema:
+          type: string
+          enum:
+          - ALL
+          - NEGATIVE
+          - POSITIVE
+      - description: Limit of results.
+        in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+      - description: Offset to start with result set
+        in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+      - description: Comma separated list of sort params. The direction could append
+          to the sort property by a colon.
+        example: "name:ASC,status:DESC"
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankStatementLineResultDtoV2'
+          description: Operation completed successfully.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Resource not found.
+      security:
+      - bearerAuth: []
+      tags:
+      - BSL
+  /clients/{client_id}/cbi/incoming_invoices:
+    get:
+      description: "Returns a list of incoming invoices filtered by optional search\
+        \ parameters. Note that lines and bookings are not returned, use /cbi/incoming_invoices/{invoice_id}\
+        \ to fetch these for a single invoice."
+      operationId: getIncomingInvoices
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: "Search text will filter for invoice sequence, business partner\
+          \ name, description, note, invoice reference and description of the invoice\
+          \ lines."
+        example: Purchase
+        in: query
+        name: search_text
+        schema:
+          type: string
+      - description: "Minimum date (invoice date for double-entry accounting, or paid/invoice\
+          \ date for other accounting types). Defaults to the beginning of the current\
+          \ year."
+        example: 2024-01-01
+        in: query
+        name: from
+        schema:
+          type: string
+          format: date
+      - description: "Maximum date (invoice date for double-entry accounting, or paid/invoice\
+          \ date for other accounting types). Defaults to the end of the current year."
+        example: 2024-08-01
+        in: query
+        name: to
+        schema:
+          type: string
+          format: date
+          pattern: yyyy-MM-dd
+      - description: "Filter the invoice states to be PAID, UNPAID, or OVERDUE. All\
+          \ types are returned by default."
+        in: query
+        name: paid_state
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PAID
+            - UNPAID
+            - OVERDUE
+      - description: Filter for currency. Defaults to all currencies.
+        example: EUR
+        in: query
+        name: currency
+        schema:
+          type: string
+      - description: Id for the business partner.
+        example: 5665af78-cc67-490-b030-f649fde5d8a8
+        in: query
+        name: business_partner
+        schema:
+          type: string
+      - description: States if cancelled invoices will be returned. Defaults to true.
+        in: query
+        name: include_cancelled
+        schema:
+          type: boolean
+      - description: Minimum date for creation date of invoices. Can only be set with
+          created_to otherwise it will be ignored.
+        example: 2024-08-01
+        in: query
+        name: created_from
+        schema:
+          type: string
+          format: date
+      - description: Maximum date for creation date of invoices. Can only be set with
+          created_from otherwise it will be ignored.
+        example: 2024-08-01
+        in: query
+        name: created_to
+        schema:
+          type: string
+          format: date
+      - description: Filter for the contra account of an invoice.
+        example: 5665af78-cc67-490-b030-f649fde5d8a8
+        in: query
+        name: contra_account
+        schema:
+          type: string
+      - description: Limit of results.
+        in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+      - description: Offset to start with result set
+        in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+      - description: Comma separated list of sort params. The direction could append
+          to the sort property by a colon.
+        example: "name:ASC,status:DESC"
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingInvoiceResultDtoV2'
+          description: Operation completed successfully.
+      security:
+      - bearerAuth: []
+      tags:
+      - CBI-INC
+    post:
+      description: "Creates an incoming invoice. Accounts can be found in the /accounts\
+        \ resource. Note that depending on the financial settings, the invoice must\
+        \ be paid. Additionally, for double-entry accounting the invoice is always\
+        \ booked immediately."
+      operationId: postIncomingInvoice
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncomingInvoiceCreationDtoV2'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingInvoiceModificationResultDtoV2'
+          description: Operation completed successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Input invalid. Further information in the RestError response.
+      security:
+      - bearerAuth: []
+      tags:
+      - CBI-INC
+  /clients/{client_id}/cbi/incoming_invoices/{invoice}:
+    delete:
+      description: Deletes an unpaid incoming invoice. Single-entry accounting (EA)
+        only.
+      operationId: deleteIncomingInvoice
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: Invoice id
+        example: a88cee2d-0a27-439d-a9c3-e9267075f1f1
+        in: path
+        name: invoice
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Operation completed successfully.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Resource not found.
+      security:
+      - bearerAuth: []
+      tags:
+      - CBI-INC
+    get:
+      description: Returns an incoming invoice referenced by its id.
+      operationId: getIncomingInvoiceById
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: Invoice id
+        in: path
+        name: invoice
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomingInvoiceDetailDtoV2'
+          description: Operation completed successfully.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Resource not found.
+      security:
+      - bearerAuth: []
+      tags:
+      - CBI-INC
+  /clients/{client_id}/cbi/incoming_invoices/{invoice}/bookings:
+    get:
+      description: Returns all bookings for an incoming invoice.
+      operationId: getIncomingInvoiceBookings
+      parameters:
+      - in: path
+        name: client_id
+        required: true
+        schema:
+          type: string
+      - description: Invoice id
+        example: a88cee2d-0a27-439d-a9c3-e9267075f1f1
+        in: path
+        name: invoice
+        required: true
+        schema:
+          type: string
+      - description: Limit of results.
+        in: query
+        name: limit
+        schema:
+          type: integer
+          format: int32
+      - description: Offset to start with result set
+        in: query
+        name: offset
+        schema:
+          type: integer
+          format: int32
+      - description: Comma separated list of sort params. The direction could append
+          to the sort property by a colon.
+        example: "name:ASC,status:DESC"
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceBookingResultDtoV2'
+          description: Operation completed successfully.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+          description: Resource not found.
+      security:
+      - bearerAuth: []
+      tags:
+      - CBI-INC
+  /clients/{client_id}/cbi/incoming_invoices/{invoice}/bookings/{booking}:
+    get:
+      description: Returns a single booking 
