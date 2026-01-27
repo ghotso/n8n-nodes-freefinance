@@ -43,6 +43,10 @@ class FreeFinance {
                             value: 'customer',
                         },
                         {
+                            name: 'Document',
+                            value: 'document',
+                        },
+                        {
                             name: 'Incoming Invoice',
                             value: 'incomingInvoice',
                         },
@@ -250,6 +254,28 @@ class FreeFinance {
                         },
                     ],
                     default: 'getAll',
+                },
+                {
+                    displayName: 'Operation',
+                    name: 'operation',
+                    type: 'options',
+                    noDataExpression: true,
+                    displayOptions: {
+                        show: {
+                            resource: [
+                                'document',
+                            ],
+                        },
+                    },
+                    options: [
+                        {
+                            name: 'Upload',
+                            value: 'upload',
+                            description: 'Upload a document to the staging folder (Doku-Archiv)',
+                            action: 'Upload a document',
+                        },
+                    ],
+                    default: 'upload',
                 },
                 {
                     displayName: 'Client',
@@ -555,6 +581,60 @@ class FreeFinance {
                     default: '',
                     description: 'The date the invoice was paid',
                 },
+                // --- Document Upload Parameters ---
+                {
+                    displayName: 'Binary Property',
+                    name: 'binaryPropertyName',
+                    type: 'string',
+                    required: true,
+                    displayOptions: {
+                        show: {
+                            resource: ['document'],
+                            operation: ['upload'],
+                        },
+                    },
+                    default: 'data',
+                    description: 'Name of the binary property containing the file to upload (PDF, image, XML, etc.)',
+                },
+                {
+                    displayName: 'File Name',
+                    name: 'fileName',
+                    type: 'string',
+                    displayOptions: {
+                        show: {
+                            resource: ['document'],
+                            operation: ['upload'],
+                        },
+                    },
+                    default: '',
+                    description: 'Override the file name. If empty, uses the name from binary data.',
+                },
+                {
+                    displayName: 'Description',
+                    name: 'documentDescription',
+                    type: 'string',
+                    displayOptions: {
+                        show: {
+                            resource: ['document'],
+                            operation: ['upload'],
+                        },
+                    },
+                    default: '',
+                    description: 'Optional description for the document (used for search)',
+                },
+                {
+                    displayName: 'Skip OCR',
+                    name: 'skipOcr',
+                    type: 'boolean',
+                    displayOptions: {
+                        show: {
+                            resource: ['document'],
+                            operation: ['upload'],
+                        },
+                    },
+                    default: false,
+                    description: 'Whether to skip automatic OCR processing of the document',
+                },
             ],
         };
         this.methods = {
@@ -786,6 +866,23 @@ class FreeFinance {
                         const responseData = await GenericFunctions_1.freefinanceApiRequest.call(this, 'GET', `/clients/${clientId}/itm/items`, {}, qs);
                         const executionData = this.helpers.returnJsonArray(responseData.content);
                         returnData.push(...executionData);
+                    }
+                }
+                else if (resource === 'document') {
+                    if (operation === 'upload') {
+                        const binaryPropertyName = this.getNodeParameter('binaryPropertyName', i);
+                        const fileName = this.getNodeParameter('fileName', i);
+                        const documentDescription = this.getNodeParameter('documentDescription', i);
+                        const skipOcr = this.getNodeParameter('skipOcr', i);
+                        // Get binary data from the input
+                        const binaryData = this.helpers.assertBinaryData(i, binaryPropertyName);
+                        const fileContent = await this.helpers.getBinaryDataBuffer(i, binaryPropertyName);
+                        const responseData = await GenericFunctions_1.freefinanceUploadDocument.call(this, clientId, binaryData, fileContent, {
+                            fileName: fileName || undefined,
+                            description: documentDescription || undefined,
+                            skipOcr,
+                        });
+                        returnData.push({ json: responseData });
                     }
                 }
             }
