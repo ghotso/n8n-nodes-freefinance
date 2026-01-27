@@ -490,11 +490,11 @@ export class FreeFinance implements INodeType {
                 description: 'The bookkeeping account to use for the invoice line',
             },
             {
-                displayName: 'Tax Class',
-                name: 'taxClassId',
+                displayName: 'Tax Class Entry',
+                name: 'taxClassEntryId',
                 type: 'options',
                 typeOptions: {
-                    loadOptionsMethod: 'getTaxClasses',
+                    loadOptionsMethod: 'getTaxClassEntries',
                     loadOptionsDependsOn: ['clientId'],
                 },
                 required: true,
@@ -505,7 +505,7 @@ export class FreeFinance implements INodeType {
                     },
                 },
                 default: '',
-                description: 'The tax class to use for the invoice line',
+                description: 'The tax class entry (tax rate) to use for the invoice line',
             },
             {
                 displayName: 'Description',
@@ -535,7 +535,7 @@ export class FreeFinance implements INodeType {
             {
                 displayName: 'Invoice Date',
                 name: 'invoiceDate',
-                type: 'dateTime',
+                type: 'string',
                 displayOptions: {
                     show: {
                         operation: ['create'],
@@ -543,6 +543,8 @@ export class FreeFinance implements INodeType {
                     },
                 },
                 default: '',
+                placeholder: 'YYYY-MM-DD',
+                description: 'Invoice date in format YYYY-MM-DD (e.g. 2024-01-15)',
             },
             {
                 displayName: 'Paid',
@@ -579,7 +581,7 @@ export class FreeFinance implements INodeType {
             {
                 displayName: 'Paid Date',
                 name: 'paidDate',
-                type: 'dateTime',
+                type: 'string',
                 required: true,
                 displayOptions: {
                     show: {
@@ -589,7 +591,8 @@ export class FreeFinance implements INodeType {
                     },
                 },
                 default: '',
-                description: 'The date the invoice was paid',
+                placeholder: 'YYYY-MM-DD',
+                description: 'The date the invoice was paid in format YYYY-MM-DD',
             },
             // --- Document Upload Parameters ---
             {
@@ -685,14 +688,25 @@ export class FreeFinance implements INodeType {
                     value: supplier.id as string,
                 }));
             },
-            async getTaxClasses(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+            async getTaxClassEntries(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
                 const clientId = this.getCurrentNodeParameter('clientId') as string;
-                const responseData = await freefinanceApiRequest.call(this, 'GET', `/clients/${clientId}/fis/tax_classes`) as IDataObject;
-                const taxClasses = responseData.content as IDataObject[];
-                return taxClasses.map((taxClass) => ({
-                    name: taxClass.display_name as string,
-                    value: taxClass.id as string,
-                }));
+                // First get all tax classes
+                const taxClassesResponse = await freefinanceApiRequest.call(this, 'GET', `/clients/${clientId}/fis/tax_classes`) as IDataObject;
+                const taxClasses = taxClassesResponse.content as IDataObject[];
+
+                // Then get entries for each tax class
+                const allEntries: INodePropertyOptions[] = [];
+                for (const taxClass of taxClasses) {
+                    const entriesResponse = await freefinanceApiRequest.call(this, 'GET', `/clients/${clientId}/fis/tax_classes/${taxClass.id}/entries`) as IDataObject;
+                    const entries = entriesResponse.content as IDataObject[];
+                    for (const entry of entries) {
+                        allEntries.push({
+                            name: `${taxClass.display_name}: ${entry.display_name}`,
+                            value: entry.id as string,
+                        });
+                    }
+                }
+                return allEntries;
             },
             async getPaymentAccounts(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
                 const clientId = this.getCurrentNodeParameter('clientId') as string;
@@ -790,16 +804,13 @@ export class FreeFinance implements INodeType {
                     } else if (operation === 'create') {
                         const supplierId = this.getNodeParameter('supplierId', i) as string;
                         const accountId = this.getNodeParameter('accountId', i) as string;
-                        const taxClassId = this.getNodeParameter('taxClassId', i) as string;
+                        const taxClassEntryId = this.getNodeParameter('taxClassEntryId', i) as string;
                         const totalAmount = this.getNodeParameter('amount', i) as number;
                         const description = this.getNodeParameter('description', i) as string;
                         const invoiceDate = this.getNodeParameter('invoiceDate', i) as string;
 
                         const body: IDataObject = {
                             supplier: supplierId,
-                            description,
-                            total: totalAmount,
-                            invoice_date: invoiceDate,
                             lines: [
                                 {
                                     account: accountId,
@@ -808,12 +819,20 @@ export class FreeFinance implements INodeType {
                                     description,
                                     taxes: {
                                         tax_1: {
-                                            tax_class: taxClassId,
+                                            tax_class_entry: taxClassEntryId,
                                         },
                                     },
                                 },
                             ],
                         };
+
+                        // Only add optional fields if they have values
+                        if (description) {
+                            body.description = description;
+                        }
+                        if (invoiceDate) {
+                            body.invoice_date = invoiceDate;
+                        }
 
                         if (this.getNodeParameter('paid', i) as boolean) {
                             body.paid_date = this.getNodeParameter('paidDate', i) as string;
@@ -833,16 +852,13 @@ export class FreeFinance implements INodeType {
                     } else if (operation === 'create') {
                         const customerId = this.getNodeParameter('customerId', i) as string;
                         const accountId = this.getNodeParameter('accountId', i) as string;
-                        const taxClassId = this.getNodeParameter('taxClassId', i) as string;
+                        const taxClassEntryId = this.getNodeParameter('taxClassEntryId', i) as string;
                         const totalAmount = this.getNodeParameter('amount', i) as number;
                         const description = this.getNodeParameter('description', i) as string;
                         const invoiceDate = this.getNodeParameter('invoiceDate', i) as string;
 
                         const body: IDataObject = {
                             customer: customerId,
-                            description,
-                            total: totalAmount,
-                            invoice_date: invoiceDate,
                             lines: [
                                 {
                                     account: accountId,
@@ -851,12 +867,20 @@ export class FreeFinance implements INodeType {
                                     description,
                                     taxes: {
                                         tax_1: {
-                                            tax_class: taxClassId,
+                                            tax_class_entry: taxClassEntryId,
                                         },
                                     },
                                 },
                             ],
                         };
+
+                        // Only add optional fields if they have values
+                        if (description) {
+                            body.description = description;
+                        }
+                        if (invoiceDate) {
+                            body.invoice_date = invoiceDate;
+                        }
 
                         if (this.getNodeParameter('paid', i) as boolean) {
                             body.paid_date = this.getNodeParameter('paidDate', i) as string;
